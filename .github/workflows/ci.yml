@@ -86,7 +86,7 @@ jobs:
           python-version: '3.12'
       - name: Check alpha package versions and local documentation links
         run: python3 scripts/check_public_alpha.py
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: browser-checks
@@ -156,7 +156,7 @@ jobs:
           raise SystemExit(bool(report.get('errors')) or any(
               r['issue_confidence'] == 'HIGH' and r['issue_severity'] in {'MEDIUM', 'HIGH'} for r in results))
           PYTHON
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: source-security
@@ -229,7 +229,7 @@ jobs:
           "$RUNNER_TEMP/trivy" image --format cyclonedx --no-progress \
             --output "$RUNNER_TEMP/mailsec-sbom.cdx.json" --timeout 10m \
             localhost/mailsec-selfhost:0.4.0-alpha.8
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: container-security
