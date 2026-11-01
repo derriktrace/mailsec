@@ -23,9 +23,9 @@ On Linux with **Landlock ABI 6 or newer enabled** (normally Linux 6.12+), Python
 git clone https://github.com/derriktrace/mailsec.git && cd mailsec && ./selfhost.sh
 ```
 
-The `derriktrace/mailsec` checkout command is for the planned public repository;
-it will work only after that repository is published. For an unpublished release
-candidate, extract its reviewed source archive and run `./selfhost.sh` there.
+This command builds the current `main` branch. For a version-pinned install,
+use the tag and immutable image digest in that version's GitHub Release. Its
+source archive can also be extracted and run with `./selfhost.sh` without Git.
 
 Open **http://localhost:8025** and retrieve the private console token with
 `./selfhost.sh token`.
@@ -192,9 +192,10 @@ Most tests use synthetic evidence and mocked providers. PostgreSQL, antivirus,
 real OAuth, and paid model integration checks have explicit additional setup.
 CI is configured for unit/integration checks, isolated Chromium console and
 walkthrough tests under Node 22, a complete image build and database-only startup
-check, Python/image vulnerability auditing, and secret scanning. The workflow has not been run on a published GitHub repository yet.
+check, Python/image vulnerability auditing, and secret scanning. Check the
+GitHub Actions result for the exact revision you plan to install.
 
-Maintainers preparing an unpublished candidate should follow the
+Maintainers preparing a release candidate should follow the
 [public alpha release checklist](docs/public-alpha-release.md). It distinguishes
 local preparation from publishing and records remaining platform checks.
 
