@@ -1,0 +1,13 @@
+# Optional identity context. These are evidence facts, never allowlists.
+# Leave empty until an administrator can support a relationship with evidence.
+organization:
+  name: Mail workspace
+  domains: []
+  executives: []
+  accounting: []
+  payment_practices: []
+  relationships: []
+  blocked_urls: []
+  trusted_authserv_ids:
+    - mx.google.com
+  known_vendors: {}

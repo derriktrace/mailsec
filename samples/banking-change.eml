@@ -1,0 +1,13 @@
+From: Acme Plumbing <billing@acme-plurnbing.example>
+To: analyst@example.org
+Subject: Updated banking details for your invoice
+Date: Mon, 28 Sep 2026 10:05:00 +0000
+Message-ID: <synthetic-banking-change@mailsec.example>
+X-Mailsec-Synthetic: true
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+I am the billing manager of Acme Plumbing. Urgently send today's invoice paym=
+ent to our new bank account instead of the usual account. Do not call your no=
+rmal contact to verify; I am traveling and the transfer must happen now.

@@ -1,0 +1,51 @@
+{
+  "software_execution_requested": {
+    "type": "noul",
+    "instructions": "Does the CURRENT sender ask the recipient to install or run software, a script, a repository, a package-manager command, a container, or a firmware update? Identify the requested action independently of whether it seems legitimate. Read body and attachments. Quoted examples in a security warning are not current instructions.",
+    "criteria": {
+      "true": "The sender asks the recipient to install, update, build, or execute software; this includes a recruiting exercise or running npm/pnpm commands.",
+      "false": "No such action is requested; merely discussing software or warning against running it does not count."
+    }
+  },
+  "wallet_control_requested": {
+    "type": "noul",
+    "instructions": "Does the CURRENT sender direct the recipient to connect, authorize, restore, recover, or manage access to a cryptocurrency wallet? Judge the action, not legitimacy.",
+    "criteria": {
+      "true": "A wallet connection, authorization, recovery, seed disclosure, device connection, or wallet permission change is requested.",
+      "false": "No wallet-control action is requested; a purely informational mention of cryptocurrency does not count."
+    }
+  },
+  "payment_requested": {
+    "type": "noul",
+    "instructions": "Does the current email or attached invoice ask the recipient to make a payment, send funds, or change payment destination? Judge what is requested, not whether it is fraudulent.",
+    "criteria": {
+      "true": "There is a current payment instruction or payable invoice, including PIX, boleto, deposit, or bank-detail change.",
+      "false": "No payment is requested; a receipt only confirming a completed charge is not a payment request. An optional product offer requiring future checkout is not a current payment instruction."
+    }
+  },
+  "transaction_callback": {
+    "type": "noul",
+    "instructions": "Does this message supply a telephone contact as the route to resolve, cancel, dispute, refund, or get help with a claimed charge, renewal, purchase, or account-security problem? Identify the route independently of legitimacy.",
+    "criteria": {
+      "true": "A claimed transaction or security issue is paired with a supplied support or callback phone number, including one in an attached receipt.",
+      "false": "No such pairing; an ordinary contact signature without a transaction/security issue does not count."
+    }
+  },
+  "secrets_or_login_requested": {
+    "type": "noul",
+    "instructions": "Does the current sender ask the recipient to provide a password, MFA code, seed phrase, sensitive personal data, or authenticate through a supplied account link? Judge the action, not legitimacy.",
+    "criteria": {
+      "true": "Current instructions ask for secrets, sensitive data, or account authentication.",
+      "false": "No such request; delivering a code or saying never to disclose secrets does not count."
+    }
+  },
+  "claimed_authority": {
+    "type": "choice",
+    "instructions": "How does the CURRENT author present their role? Distinguish claiming to BE an organization's billing/security/recruiting team from openly being a customer, reseller, individual supplier, or forwarder. Logos and attachment issuer claims count as content claims, never independent verification.",
+    "criteria": {
+      "official_representative": "The author presents this as an official organization's account, billing, security, recruiting, or support communication.",
+      "independent_party": "The author openly acts as an individual, customer, independent seller/reseller, commentator, or forwarder without claiming the referenced organization's official authority.",
+      "unclear": "No role is identifiable or the role is ambiguous."
+    }
+  }
+}

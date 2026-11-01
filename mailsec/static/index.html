@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Evidence-first mail security, connected account controls, and auditable protection with your choice of decision model.">
+  <title>Mailsec · Evidence console</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%23172c24'/%3E%3Ctext x='7' y='29' font-family='Georgia' font-size='32' font-weight='700' fill='%23c9ddbf'%3Em%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+  <script src="/static/onboarding.js" defer></script>
+  <script src="/static/question-editor.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="Mailsec home"><span class="brand-mark" aria-hidden="true">m</span><span>mailsec<span class="brand-caption">EVIDENCE CONSOLE</span></span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <label class="workspace-switch" for="workspace-select"><span class="sr-only">Choose workspace</span><select id="workspace-select" aria-label="Choose workspace" disabled><option>Loading workspace…</option></select></label>
+      <button class="nav-item active" id="nav-overview"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm10 0h6v6h-6z"/></svg>Overview</button>
+      <button class="nav-item" id="nav-inbox"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16v14H4zM4 12h5l2 3h2l2-3h5"/></svg>Mail review<span id="nav-count">—</span></button>
+      <button class="nav-item" id="nav-protection" aria-label="Protection settings"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6zM8 12l3 3 5-6"/></svg>Protection</button>
+      <button class="nav-item" id="nav-actions" aria-label="Mailbox action ledger"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 5H4v16h16V5h-3M9 3h6v4H9zM8 12h8M8 16h6"/></svg>Action ledger<span id="action-count">—</span></button>
+      <button class="nav-item" id="connection-button" aria-label="Connected accounts"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 7V4m6 3V4M7 8h10v5a5 5 0 0 1-10 0V8zm5 10v3"/></svg>Connections<span class="nav-dot" id="connection-dot"></span></button>
+      <button class="nav-item" id="nav-setup" aria-label="Setup walkthrough"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z"/></svg>Setup walkthrough</button>
+      <div class="workspace-label advanced-label" id="advanced-label">ADVANCED</div>
+      <button class="nav-item" id="nav-questions" aria-label="Detection questions"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h16M8 2v6m8 1v6m-5 1v6"/></svg>Detection questions</button>
+      <div class="sidebar-note"><div class="eyebrow">BUILT FOR INVESTIGATION</div><p>Every judgment starts with evidence.</p><span>Inspect the signal.<br>Keep the audit trail.</span></div>
+      <div class="sidebar-bottom"><span class="live-dot"></span><div id="sidebar-mode">Loading policy<small>Connection status is being checked</small></div></div>
+    </aside>
+
+    <main class="main">
+      <header class="page-header"><div><div class="eyebrow" id="page-eyebrow">MAIL SECURITY / OVERVIEW</div><h1>Know what’s in your inbox.</h1><p id="page-description">A live view of mail evidence, risk, and review.</p></div><div class="header-actions"><span class="model-state" id="model-state"><span class="live-dot"></span>Connecting</span><button class="button primary" id="import-button"><span aria-hidden="true">＋</span> Import email</button></div></header>
+      <div class="status-strip"><span class="passive-pill" id="mode-pill">CHECKING MODE</span><span id="mode-description">Loading protection settings…</span><span class="last-update" id="last-update">Connecting to service…</span></div>
+      <div id="readiness-banner" class="readiness-banner" role="status" hidden></div>
+      <section id="provider-privacy-banner" class="provider-privacy-banner" role="alert" aria-label="Email sharing approval required" hidden></section>
+      <div id="evaluation-banner" class="evaluation-banner" hidden><strong>Phishing Pot · Evaluation workspace</strong><p>Separate sample collection. No Gmail connection or mailbox actions. Repository membership is not a verified phishing label.</p><a href="https://github.com/rf-peixoto/phishing_pot" target="_blank" rel="noopener noreferrer">Source and attribution ↗</a><span id="corpus-progress"></span></div>
+      <section class="stats" aria-label="Message verdicts">
+        <button class="stat-card" data-filter="clean"><span class="stat-label"><span class="verdict-dot clean"></span>Clean</span><strong id="count-clean">—</strong><span class="stat-description">Coherent, legitimate mail</span></button>
+        <button class="stat-card" data-filter="spam"><span class="stat-label"><span class="verdict-dot spam"></span>Spam</span><strong id="count-spam">—</strong><span class="stat-description">Unwanted, without hostile evidence</span></button>
+        <button class="stat-card" data-filter="suspicious"><span class="stat-label"><span class="verdict-dot suspicious"></span>Suspicious</span><strong id="count-suspicious">—</strong><span class="stat-description">A consequential unknown remains</span></button>
+        <button class="stat-card" data-filter="phishing"><span class="stat-label"><span class="verdict-dot phishing"></span>Phishing</span><strong id="count-phishing">—</strong><span class="stat-description">Affirmative deceptive or hostile evidence</span></button>
+      </section>
+      <section class="dashboard" id="overview" aria-label="Mail security overview"></section>
+      <section id="setup-view" class="setup-view" aria-label="Setup walkthrough" hidden></section>
+      <section id="protection-view" class="control-view" aria-label="Protection settings" hidden></section>
+      <section id="accounts-view" class="control-view" aria-label="Connected accounts" hidden></section>
+      <section id="actions-view" class="control-view" aria-label="Mailbox action ledger" hidden></section>
+      <section id="questions-view" class="questions-view" aria-label="Detection questions" hidden></section>
+      <section class="workbench" id="workbench" aria-label="Email review workbench" hidden>
+        <div class="queue-panel">
+          <div class="queue-heading"><h2>Review queue <span id="queue-total">0</span></h2><span id="pending-count" class="pending-label"></span></div>
+          <label class="search-field"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><input id="search" type="search" placeholder="Search sender or subject" aria-label="Search sender or subject"></label>
+          <div class="filter-row"><label for="verdict-filter">Show</label><select id="verdict-filter"><option value="">All messages</option><option value="clean">Clean</option><option value="spam">Spam</option><option value="suspicious">Suspicious</option><option value="phishing">Phishing</option><option value="pending">Pending</option><option value="error">Errors</option></select><button id="refresh-button" class="icon-button" aria-label="Refresh messages" title="Refresh messages">↻</button></div>
+          <div id="message-list" class="message-list" aria-label="Emails" aria-live="polite"></div>
+          <div class="queue-footer"><span class="refresh-note"><span class="live-dot"></span>Refreshes every 5 seconds</span><div class="queue-pagination" id="queue-pagination" hidden><button class="icon-button" id="previous-page" aria-label="Previous page">‹</button><span id="page-label"></span><button class="icon-button" id="next-page" aria-label="Next page">›</button></div></div>
+        </div>
+        <section id="detail" class="detail-panel" aria-label="Selected email" aria-live="polite"></section>
+      </section>
+      <footer class="page-footer"><span>Evidence retained. Decisions versioned.</span><span id="version-label">Mailsec · Evidence-first email security</span></footer>
+    </main>
+  </div>
+
+  <input id="file-input" type="file" accept=".eml,message/rfc822" multiple hidden>
+  <div class="drop-overlay" id="drop-overlay" hidden><div><span class="drop-symbol">↓</span><h2>Drop your email here.</h2><p>Import .eml files to preserve the original message and evidence.</p></div></div>
+  <div class="toast-container" id="toasts" aria-live="polite" aria-atomic="false"></div>
+  <dialog id="connections-dialog" class="modal">
+    <div class="modal-header"><div><div class="eyebrow">WORKSPACE SETTINGS</div><h2>Connections & processing</h2></div><button class="icon-button close-dialog" aria-label="Close settings">×</button></div>
+    <div id="connection-content"></div>
+    <div class="modal-footer"><button class="button close-dialog">Done</button></div>
+  </dialog>
+  <dialog id="auth-dialog" class="modal auth-modal">
+    <form id="auth-form"><div class="eyebrow">LOCAL ACCESS</div><h2>Connect to this console</h2><p>This service requires its configured access token.</p><label for="access-token">Console access token</label><input id="access-token" type="password" autocomplete="off" required><p class="field-note">Kept in this tab’s session only. This is separate from your model provider’s API key.</p><div class="modal-footer"><button class="button primary" type="submit">Connect</button></div></form>
+  </dialog>
+  <dialog id="confirm-dialog" class="modal">
+    <div class="eyebrow">CONFIRM ACTION</div><h2 id="confirm-title"></h2><p id="confirm-description"></p>
+    <div class="modal-footer confirm-footer"><button class="button" id="confirm-cancel" type="button">Cancel</button><button class="button primary" id="confirm-accept" type="button">Continue</button></div>
+  </dialog>
+</body>
+</html>

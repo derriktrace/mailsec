@@ -1,0 +1,53 @@
+name: mailsec-selfhost
+services:
+  mailsec:
+    image: ${MAILSEC_IMAGE:-localhost/mailsec-selfhost:0.4.0-alpha.8}
+    build: {context: ., dockerfile: Dockerfile.selfhost}
+    environment:
+      MAILSEC_BUILD_REVISION: ${MAILSEC_APP_BUILD_REVISION:-1}
+      MAILSEC_SETUP_REVISION: ${MAILSEC_SETUP_REVISION:-1}
+      MAILSEC_DATABASE_ONLY: ${MAILSEC_DATABASE_ONLY:-false}
+      TYPESAFE_MODEL: jev-1.13.0
+      MAILSEC_REQUIRE_AUTH: 'true'
+      MAILSEC_ALLOWED_HOSTS: ${MAILSEC_ALLOWED_HOSTS:-localhost,127.0.0.1}
+      MAILSEC_TENANT_ID: selfhost
+      MAILSEC_WORKSPACE_NAME: ${MAILSEC_WORKSPACE_NAME:-Mail workspace}
+      MAILSEC_AUTHORIZED_MAILBOXES: ${MAILSEC_AUTHORIZED_MAILBOXES:-}
+      GOOGLE_OAUTH_REDIRECT_URI: ${GOOGLE_OAUTH_REDIRECT_URI:-http://localhost:8025/oauth/google/callback}
+      MAILSEC_PUBLIC_BASE_URL: ${MAILSEC_PUBLIC_BASE_URL:-http://localhost:8025}
+      MAILSEC_TRUSTED_PROXY_IPS: ${MAILSEC_TRUSTED_PROXY_IPS:-127.0.0.1}
+      MAILSEC_ENFORCEMENT_MODE: passive
+      MAILSEC_NOTIFICATIONS_ENABLED: 'false'
+      MAILSEC_INSPECTION_TIMEOUT_SECONDS: 120
+      MAILSEC_INITIAL_QUERY: ${MAILSEC_INITIAL_QUERY:--in:sent -in:drafts newer_than:30d}
+      MAILSEC_MAX_INITIAL_MESSAGES: 250
+      MAILSEC_POLL_SECONDS: 30
+      MAILSEC_ACTION_REVIEW_ENABLED: 'true'
+      MAILSEC_CLAIM_VERIFICATION_ENABLED: 'true'
+      WEB_RISK_API_KEY: ''
+    volumes:
+      - data:/data
+      # Whole private directory: sibling scanner UIDs cannot read bootstrap keys.
+      - ${MAILSEC_STATE_DIR:-./.selfhost}/secrets:/run/bootstrap-private:ro,z
+      - ${MAILSEC_STATE_DIR:-./.selfhost}/organization.yaml:/run/bootstrap-organization.yaml:ro,z
+    ports: ['127.0.0.1:${MAILSEC_PORT:-8025}:8025']
+    extra_hosts: ['host.docker.internal:host-gateway']
+    read_only: true
+    tmpfs: ['/run:rw,noexec,nosuid,size=64m', '/tmp:rw,noexec,nosuid,size=256m']
+    cap_drop: [ALL]
+    # PID1 only initializes private paths and supervises separate unprivileged UIDs.
+    cap_add: [CHOWN, DAC_OVERRIDE, SETUID, SETGID, KILL]
+    security_opt: ['no-new-privileges:true']
+    pids_limit: 256
+    mem_limit: 8g
+    cpus: 4
+    healthcheck:
+      test: ['CMD', 'python', '/opt/mailsec/container_health.py']
+      interval: 30s
+      timeout: 10s
+      start_period: 10m
+      retries: 3
+    stop_grace_period: 110s
+    restart: unless-stopped
+volumes:
+  data: {}

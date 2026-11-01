@@ -1,0 +1,163 @@
+name: Publish alpha image (manual)
+
+# This workflow never runs from a push, pull request, or tag. The maintainer must
+# review the exact commit and its CI result, then deliberately dispatch it.
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'Type PUBLISH_ALPHA_IMAGE after reviewing this exact commit and its release evidence'
+        required: true
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: publish-alpha-${{ github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >-
+      github.repository == 'derriktrace/mailsec' &&
+      github.ref == 'refs/heads/main' &&
+      inputs.confirmation == 'PUBLISH_ALPHA_IMAGE'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    environment: alpha-image-publish
+    permissions:
+      actions: read
+      contents: read
+      packages: write
+      id-token: write
+      attestations: write
+      artifact-metadata: write
+    env:
+      IMAGE_NAME: ghcr.io/derriktrace/mailsec
+    steps:
+      - name: Checkout the exact source commit
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+
+      - name: Require a successful full CI run for this commit
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          response=$(gh api -X GET "repos/${GITHUB_REPOSITORY}/actions/workflows/ci.yml/runs" \
+            -f head_sha="$GITHUB_SHA" -f status=success -f per_page=100)
+          jq -e --arg sha "$GITHUB_SHA" \
+            '.workflow_runs | any(.[]; .head_sha == $sha and .conclusion == "success" and (.event == "push" or .event == "workflow_dispatch"))' \
+            <<< "$response" > /dev/null
+          python3 scripts/check_public_alpha.py --require-manifest
+
+      - name: Build the one-container Linux amd64 image from this commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = x86_64
+          tag="${IMAGE_NAME}:sha-${GITHUB_SHA}"
+          docker build --platform linux/amd64 --file Dockerfile.selfhost --build-arg "VCS_REF=${GITHUB_SHA}" \
+            --tag "$tag" .
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "$tag")" = "$GITHUB_SHA"
+          test "$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.source" }}' "$tag")" = "https://github.com/derriktrace/mailsec"
+
+      - name: Install checksum-verified Trivy
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            https://github.com/aquasecurity/trivy/releases/download/v0.76.0/trivy_0.76.0_Linux-64bit.tar.gz \
+            --output "$RUNNER_TEMP/trivy.tar.gz"
+          printf '%s  %s\n' e24b1c51293c1b15e4ba8d45bbc7891ba053f90278ec2698f3562c993e145fe7 "$RUNNER_TEMP/trivy.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/trivy.tar.gz" -C "$RUNNER_TEMP" trivy
+
+      - name: Scan the exact local image before upload
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag="${IMAGE_NAME}:sha-${GITHUB_SHA}"
+          "$RUNNER_TEMP/trivy" image --scanners vuln,secret --format json --no-progress \
+            --output "$RUNNER_TEMP/image-scan.json" --timeout 10m "$tag"
+          "$RUNNER_TEMP/trivy" image --format cyclonedx --no-progress \
+            --output "$RUNNER_TEMP/image-sbom.cdx.json" --timeout 10m "$tag"
+          python3 - <<'PYTHON'
+          import json, os
+          from collections import Counter
+          from pathlib import Path
+          root = Path(os.environ['RUNNER_TEMP'])
+          report = json.loads((root / 'image-scan.json').read_text())
+          vulnerabilities = [v for item in report.get('Results', []) for v in item.get('Vulnerabilities', [])]
+          secrets = [s for item in report.get('Results', []) for s in item.get('Secrets', [])]
+          summary = {'vulnerability_counts': dict(Counter(v['Severity'] for v in vulnerabilities)),
+                     'secret_count': len(secrets)}
+          print(json.dumps(summary, indent=2))
+          if (root / 'image-sbom.cdx.json').stat().st_size > 16 * 1024 * 1024:
+              raise SystemExit('SBOM exceeds GitHub attestation size limit')
+          if secrets or any(v['Severity'] in {'HIGH', 'CRITICAL'} for v in vulnerabilities):
+              raise SystemExit('Unresolved Trivy release gate; inspect the retained report')
+          PYTHON
+
+      - name: Upload the image to GitHub Container Registry
+        id: image
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag="${IMAGE_NAME}:sha-${GITHUB_SHA}"
+          printf '%s' "$GH_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+          docker push "$tag" | tee "$RUNNER_TEMP/image-push.log"
+          python3 - <<'PYTHON'
+          import os, re
+          from pathlib import Path
+          root = Path(os.environ['RUNNER_TEMP'])
+          log = (root / 'image-push.log').read_text()
+          matches = re.findall(r'\bdigest:\s*(sha256:[a-f0-9]{64})\b', log)
+          if len(matches) != 1:
+              raise SystemExit('Could not identify one immutable registry manifest digest')
+          digest = matches[0]
+          (root / 'image-digest.txt').write_text(f"{os.environ['IMAGE_NAME']}@{digest}\n")
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write(f'digest={digest}\n')
+          PYTHON
+
+      - name: Sign build provenance for the registry digest
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
+        with:
+          subject-name: ghcr.io/derriktrace/mailsec
+          subject-digest: ${{ steps.image.outputs.digest }}
+          push-to-registry: true
+
+      - name: Sign the SBOM for the same registry digest
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
+        with:
+          subject-name: ghcr.io/derriktrace/mailsec
+          subject-digest: ${{ steps.image.outputs.digest }}
+          sbom-path: ${{ runner.temp }}/image-sbom.cdx.json
+          push-to-registry: true
+
+      - name: Check anonymous pull of the immutable digest
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -m 700 "$RUNNER_TEMP/anonymous-docker"
+          docker --config "$RUNNER_TEMP/anonymous-docker" pull \
+            "${IMAGE_NAME}@${{ steps.image.outputs.digest }}"
+          printf '%s\n' "Image: ${IMAGE_NAME}@${{ steps.image.outputs.digest }}" >> "$GITHUB_STEP_SUMMARY"
+          printf '%s\n' 'Architecture: linux/amd64. Public NAS compatibility remains unverified.' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Retain scan, SBOM, and registry digest
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: alpha-image-evidence-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/image-scan.json
+            ${{ runner.temp }}/image-sbom.cdx.json
+            ${{ runner.temp }}/image-digest.txt
+          if-no-files-found: warn
+          retention-days: 90

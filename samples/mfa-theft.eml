@@ -1,0 +1,13 @@
+From: Microsoft Support <support@microsoft-secure-login.example>
+To: analyst@example.org
+Subject: Urgent: verify your MFA code
+Date: Mon, 28 Sep 2026 10:03:00 +0000
+Message-ID: <synthetic-mfa-theft@mailsec.example>
+X-Mailsec-Synthetic: true
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+This is Microsoft account security. Reply to this email with your password an=
+d the six-digit MFA code you just received, or your account will be disabled =
+in 15 minutes. Keep this verification confidential.

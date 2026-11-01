@@ -1,0 +1,246 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_DB: mailsec_ci
+          POSTGRES_USER: mailsec_ci
+          POSTGRES_PASSWORD: disposable-ci-only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U mailsec_ci -d mailsec_ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      # Disposable service credentials, never a live mailbox or application key.
+      MAILSEC_TEST_POSTGRES_URL: postgresql+psycopg://mailsec_ci:disposable-ci-only@127.0.0.1:5432/mailsec_ci
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Install PostgreSQL client build prerequisites
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends gcc python3-dev libpq-dev
+      - name: Install pinned application and inspection dependencies
+        run: |
+          python -m pip install -r requirements.lock -r requirements-inspection.lock
+          python -m pip install --no-deps -e .
+          python -m pip install 'pytest>=8,<10' 'ruff>=0.11,<1'
+      - name: Check Python errors and browser JavaScript syntax
+        run: |
+          ruff check mailsec tests scripts
+          node --check mailsec/static/app.js
+          node --check mailsec/static/onboarding.js
+          node --check mailsec/static/question-editor.js
+      - name: Run mock-provider and isolated PostgreSQL regression tests
+        run: python -m pytest -q -m 'not live'
+
+  browser-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Run isolated Chromium console and walkthrough checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Chrome is supplied by the Ubuntu runner; no mailbox or model credentials.
+          export CHROMIUM_PATH
+          CHROMIUM_PATH=$(command -v google-chrome-stable || command -v google-chrome || command -v chromium-browser || command -v chromium)
+          test -n "$CHROMIUM_PATH"
+          node tests/ui-smoke.mjs > "$RUNNER_TEMP/browser-checks.json"
+          node tests/questions-ui-smoke.mjs > "$RUNNER_TEMP/question-browser-checks.json"
+          cat "$RUNNER_TEMP/browser-checks.json"
+          cat "$RUNNER_TEMP/question-browser-checks.json"
+      - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        with:
+          python-version: '3.12'
+      - name: Check alpha package versions and local documentation links
+        run: python3 scripts/check_public_alpha.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with:
+          name: browser-checks
+          path: |
+            ${{ runner.temp }}/browser-checks.json
+            ${{ runner.temp }}/question-browser-checks.json
+            /tmp/mailsec-*ui-*.png
+            /tmp/mailsec-onboarding-*.png
+            /tmp/mailsec-question-*.png
+          retention-days: 30
+
+  dependency-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pip-audit==2.10.1
+      - name: Audit every pinned runtime package
+        run: |
+          python -m pip_audit -r requirements.lock --no-deps --disable-pip --progress-spinner off
+          python -m pip_audit -r requirements-inspection.lock --no-deps --disable-pip --progress-spinner off
+
+  secret-scan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install pinned Gitleaks CLI
+        env:
+          GOBIN: ${{ runner.temp }}/bin
+          GOTOOLCHAIN: auto
+        run: go install github.com/zricethezav/gitleaks/v8@v8.30.1
+      - name: Scan tracked history without logging secret values
+        run: '"$RUNNER_TEMP/bin/gitleaks" git . --redact --no-banner'
+
+  source-security:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548
+        with:
+          python-version: '3.12'
+      - run: python -m pip install bandit==1.9.4
+      - name: Scan shipped application and privileged runtime source
+        run: |
+          bandit -r mailsec scripts --exit-zero -f json -o "$RUNNER_TEMP/source-security.json"
+          python - <<'PYTHON'
+          import json, os
+          from collections import Counter
+          from pathlib import Path
+          report = json.loads((Path(os.environ['RUNNER_TEMP']) / 'source-security.json').read_text())
+          results = report.get('results', [])
+          print(json.dumps({'all_findings': dict(Counter(r['issue_severity'] for r in results)),
+                            'parse_errors': len(report.get('errors', []))}, indent=2))
+          # Keep all findings in the report; high-confidence medium/high issues block.
+          raise SystemExit(bool(report.get('errors')) or any(
+              r['issue_confidence'] == 'HIGH' and r['issue_severity'] in {'MEDIUM', 'HIGH'} for r in results))
+          PYTHON
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with:
+          name: source-security
+          path: ${{ runner.temp }}/source-security.json
+          retention-days: 30
+
+  container-build:
+    runs-on: ubuntu-24.04
+    # Cold builds compile and test the native scanners and shared libraries.
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
+        with:
+          python-version: '3.12'
+      - name: Build the complete image and start its bundled database
+        run: |
+          ./selfhost.sh --engine docker --runtime-dir "$RUNNER_TEMP/mailsec-ci" \
+            --project-name mailsec-selfhost-ci --port 18026 --database-only --non-interactive
+      - name: Verify one container and database-only readiness
+        shell: bash
+        run: |
+          set -euo pipefail
+          container=$(docker ps -aq --filter label=com.docker.compose.project=mailsec-selfhost-ci)
+          test -n "$container"
+          test "$(printf '%s\n' "$container" | wc -l)" -eq 1
+          for attempt in $(seq 1 60); do
+            state=$(docker inspect --format '{{.State.Health.Status}}' "$container")
+            if [ "$state" = healthy ]; then
+              docker exec "$container" python -c 'import json; from pathlib import Path; s=json.loads(Path("/run/mailsec-supervisor.json").read_text()); assert s["database_only"] and set(s["services"]) == {"postgres"}'
+              exit 0
+            fi
+            sleep 2
+          done
+          docker logs --tail 100 "$container"
+          exit 1
+      - name: Install checksum-verified Trivy
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            https://github.com/aquasecurity/trivy/releases/download/v0.76.0/trivy_0.76.0_Linux-64bit.tar.gz \
+            --output "$RUNNER_TEMP/trivy.tar.gz"
+          printf '%s  %s\n' e24b1c51293c1b15e4ba8d45bbc7891ba053f90278ec2698f3562c993e145fe7 "$RUNNER_TEMP/trivy.tar.gz" | sha256sum --check
+          tar -xzf "$RUNNER_TEMP/trivy.tar.gz" -C "$RUNNER_TEMP" trivy
+      - name: Report every image finding and block all high or critical matches
+        run: |
+          "$RUNNER_TEMP/trivy" image --scanners vuln --format json --no-progress \
+            --output "$RUNNER_TEMP/mailsec-vulnerabilities.json" --timeout 10m \
+            localhost/mailsec-selfhost:0.4.0-alpha.8
+          python - <<'PYTHON'
+          from collections import Counter
+          import json, os
+          from pathlib import Path
+          report = json.loads((Path(os.environ["RUNNER_TEMP"]) / "mailsec-vulnerabilities.json").read_text())
+          findings = [v for result in report.get("Results", []) for v in result.get("Vulnerabilities", [])]
+          summary = {"all_findings": dict(Counter(v["Severity"] for v in findings)),
+                     "fixable_findings": dict(Counter(v["Severity"] for v in findings if v.get("FixedVersion")))}
+          print(json.dumps(summary, indent=2))
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as output:
+              output.write("### Image vulnerability scan\n\n```json\n" + json.dumps(summary, indent=2) + "\n```\n\n")
+              output.write("High and critical findings block this gate even when no package fix is reported. All severities remain visible.\n")
+          raise SystemExit(any(v["Severity"] in {"HIGH", "CRITICAL"} for v in findings))
+          PYTHON
+      - name: Generate software bill of materials
+        if: always()
+        run: |
+          "$RUNNER_TEMP/trivy" image --format cyclonedx --no-progress \
+            --output "$RUNNER_TEMP/mailsec-sbom.cdx.json" --timeout 10m \
+            localhost/mailsec-selfhost:0.4.0-alpha.8
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with:
+          name: container-security
+          path: |
+            ${{ runner.temp }}/mailsec-vulnerabilities.json
+            ${{ runner.temp }}/mailsec-sbom.cdx.json
+          retention-days: 30
+      - name: Remove only the disposable CI installation
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/mailsec-ci/compose.env" ]; then
+            docker compose --env-file "$RUNNER_TEMP/mailsec-ci/compose.env" \
+              -f compose.selfhost.yaml -p mailsec-selfhost-ci down --volumes --remove-orphans
+          fi

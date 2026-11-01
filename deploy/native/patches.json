@@ -1,0 +1,209 @@
+{
+  "patches": [
+    {
+      "component": "onenote_parser",
+      "version": "0.3.1",
+      "source_revision": "Cisco-Talos/onenote.rs@8b450447e58143004b68dd21c11b710fdb79be92",
+      "advisory": "CVE-2026-46671",
+      "upstream_patch_url": "https://github.com/msiemens/onenote.rs/commit/c9267b2c96e2542be7e7b557d67318e81b733585.patch",
+      "upstream_patch_sha256": "e1f7b5b064362c432d61c64f97f48dea13b0be3bee27772b99d7277dc893d2a6",
+      "adaptation": "Backport notebook entry path confinement using std only and the existing IO error conversion; preserve the Cisco buffer API and honest original version. Reject absolute and parent paths, Windows separator/drive syntax, invalid characters, and existing symlink escapes.",
+      "files": {
+        "scripts/patch_clamav_onenote.py": "d015d54445f7e7d859973529bedd64556e6dd96c5c7a6ac48039d67320dc95a1",
+        "deploy/native/onenote_path_policy.rs": "aa8f1b234b72c28add3276553ce0c6745e62634d3f7a5ee6586772540677a476"
+      },
+      "regression_execution": "rustc --edition=2021 --test wrapper plus exact path policy module; four tests execute in the native image build before ClamAV compilation."
+    },
+    {
+      "advisory": "CVE-2026-88047",
+      "component": "tesseract",
+      "version": "5.5.3",
+      "upstream_patch_url": "https://github.com/tesseract-ocr/tesseract/commit/1bda5079b1c8a7e25f523486837426903d29ce84.patch",
+      "upstream_patch_sha256": "81cfeadb66eaaa62215963f4eb613212da3b153cac3685e1c8b8b6d19a9e6980",
+      "files": {
+        "deploy/native/patches/CVE-2026-88047.patch": "81cfeadb66eaaa62215963f4eb613212da3b153cac3685e1c8b8b6d19a9e6980"
+      },
+      "bytes": 8449,
+      "integration": "Included unmodified in pinned upstream revision 565e3bd72a0ecc4814ccffbda3f17afcb40d75ef",
+      "regression_execution": "Build and run the eight upstream security-test targets in the native image builder."
+    },
+    {
+      "advisory": "CVE-2026-88048",
+      "component": "tesseract",
+      "version": "5.5.3",
+      "upstream_patch_url": "https://github.com/tesseract-ocr/tesseract/commit/103dc134eb36411ddc6833ec20aa2c76795bd0ff.patch",
+      "upstream_patch_sha256": "21af537b323ccfd44501ec07b54476580c8132499de2bd5014ddbff46cc114dd",
+      "files": {
+        "deploy/native/patches/CVE-2026-88048.patch": "21af537b323ccfd44501ec07b54476580c8132499de2bd5014ddbff46cc114dd"
+      },
+      "bytes": 8619,
+      "integration": "Included unmodified in pinned upstream revision 565e3bd72a0ecc4814ccffbda3f17afcb40d75ef",
+      "regression_execution": "Build and run the eight upstream security-test targets in the native image builder."
+    },
+    {
+      "advisory": "CVE-2026-88049",
+      "component": "tesseract",
+      "version": "5.5.3",
+      "upstream_patch_url": "https://github.com/tesseract-ocr/tesseract/commit/b494ac18925f9d9aff9ef5815475de9943ab19bf.patch",
+      "upstream_patch_sha256": "b6860ee415aa0f7a5a73d79e8de115f99c09fa66fc010dd7cb7469f4eb10963f",
+      "files": {
+        "deploy/native/patches/CVE-2026-88049.patch": "b6860ee415aa0f7a5a73d79e8de115f99c09fa66fc010dd7cb7469f4eb10963f"
+      },
+      "bytes": 12066,
+      "integration": "Included unmodified in pinned upstream revision 565e3bd72a0ecc4814ccffbda3f17afcb40d75ef",
+      "regression_execution": "Build and run the eight upstream security-test targets in the native image builder."
+    },
+    {
+      "advisory": "CVE-2026-88050",
+      "component": "tesseract",
+      "version": "5.5.3",
+      "upstream_patch_url": "https://github.com/tesseract-ocr/tesseract/commit/c94a5532ee04db5a4919542832fd94caee5ea58f.patch",
+      "upstream_patch_sha256": "b474e6f65e613143df005f92170e049f08f09144bd64bf1babb548a524d54dbb",
+      "files": {
+        "deploy/native/patches/CVE-2026-88050.patch": "b474e6f65e613143df005f92170e049f08f09144bd64bf1babb548a524d54dbb"
+      },
+      "bytes": 7850,
+      "integration": "Included unmodified in pinned upstream revision 565e3bd72a0ecc4814ccffbda3f17afcb40d75ef",
+      "regression_execution": "Build and run the eight upstream security-test targets in the native image builder."
+    },
+    {
+      "advisory": "CVE-2026-88051",
+      "component": "tesseract",
+      "version": "5.5.3",
+      "upstream_patch_url": "https://github.com/tesseract-ocr/tesseract/commit/56e09ca12e751623fe796ce1554ce704bffd2ef0.patch",
+      "upstream_patch_sha256": "fe931cd9ccc6787ef22076d9b12507b6429043e0f7792272bdbc8e3c47cacf41",
+      "files": {
+        "deploy/native/patches/CVE-2026-88051.patch": "fe931cd9ccc6787ef22076d9b12507b6429043e0f7792272bdbc8e3c47cacf41"
+      },
+      "bytes": 6742,
+      "integration": "Included unmodified in pinned upstream revision 565e3bd72a0ecc4814ccffbda3f17afcb40d75ef",
+      "regression_execution": "Build and run the eight upstream security-test targets in the native image builder."
+    },
+    {
+      "advisory": "CVE-2026-88052",
+      "component": "tesseract",
+      "version": "5.5.3",
+      "upstream_patch_url": "https://github.com/tesseract-ocr/tesseract/commit/2d04d640db2e8c7e3bab2369d599343b5a8b8443.patch",
+      "upstream_patch_sha256": "8bfd76c5dbe80249ad48152d286fc87fcefd8a57129099413a70476321cb7feb",
+      "files": {
+        "deploy/native/patches/CVE-2026-88052.patch": "8bfd76c5dbe80249ad48152d286fc87fcefd8a57129099413a70476321cb7feb"
+      },
+      "bytes": 6486,
+      "integration": "Included unmodified in pinned upstream revision 565e3bd72a0ecc4814ccffbda3f17afcb40d75ef",
+      "regression_execution": "Build and run the eight upstream security-test targets in the native image builder."
+    },
+    {
+      "advisory": "CVE-2026-88053",
+      "component": "tesseract",
+      "version": "5.5.3",
+      "upstream_patch_url": "https://github.com/tesseract-ocr/tesseract/commit/8b0574680f3b22f246ade6a4c8e3029104255c63.patch",
+      "upstream_patch_sha256": "1b80580e4d3e33f9f4d31e3f88cddbf2a7ede75408d2ccc4159ece6acbcd4b46",
+      "files": {
+        "deploy/native/patches/CVE-2026-88053.patch": "1b80580e4d3e33f9f4d31e3f88cddbf2a7ede75408d2ccc4159ece6acbcd4b46"
+      },
+      "bytes": 30082,
+      "integration": "Included unmodified in pinned upstream revision 565e3bd72a0ecc4814ccffbda3f17afcb40d75ef",
+      "regression_execution": "Build and run the eight upstream security-test targets in the native image builder."
+    },
+    {
+      "advisory": "CVE-2026-88054",
+      "component": "tesseract",
+      "version": "5.5.3",
+      "upstream_patch_url": "https://github.com/tesseract-ocr/tesseract/commit/552771236b0d80cbdb0c7dd856120fa21a4672e5.patch",
+      "upstream_patch_sha256": "ca37052968d23df294029148d082f57b6287849303e24688dbb7057df11cbeea",
+      "files": {
+        "deploy/native/patches/CVE-2026-88054.patch": "ca37052968d23df294029148d082f57b6287849303e24688dbb7057df11cbeea"
+      },
+      "bytes": 10623,
+      "integration": "Included unmodified in pinned upstream revision 565e3bd72a0ecc4814ccffbda3f17afcb40d75ef",
+      "regression_execution": "Build and run the eight upstream security-test targets in the native image builder."
+    },
+    {
+      "component": "clamav",
+      "version": "1.4.6",
+      "purpose": "Compatibility with mandatory outbound-connect denial on musl: only the fixed numeric127.0.0.1 listener skips AI_ADDRCONFIG network probes, using AF_INET/AI_NUMERICHOST/AI_NUMERICSERV. Other listener addresses retain upstream behavior.",
+      "files": {
+        "scripts/patch_clamav_loopback.py": "cc561c4ab48c210f7e14c651fc30007162d529c49a6b2f74ef76dce772ee03c5"
+      },
+      "regression_execution": "Six ClamAV upstream suites plus actual confined listener/EICAR tests in the final image."
+    },
+    {
+      "component": "busybox",
+      "version": "1.37.0-r100",
+      "advisory": "CVE-2025-60876",
+      "upstream_distribution_revision": "alpinelinux/aports@231b3edb78d995cabc640c7e118d8a74fd50e6b4",
+      "adaptation": "Preserve all44 Alpine patches, original config and304 applets. Validate raw control/space/DEL bytes before initial/proxy requests or absolute/relative redirects. Keep percent-encoded URLs functional.",
+      "files": {
+        "scripts/build_busybox.sh": "8c16e849557fa0bf83cb925ff17bbe7a7dd70d19443709db76517be64ca1ddc2",
+        "scripts/patch_busybox_wget.py": "f30ebb7b69bf9d627a86b213182e96f726334da56269c9334a12c806b17f55f2",
+        "scripts/check_busybox_wget.py": "59616cfcc1e8c29008636f8824b73a9dda5fe31cfb43d7e6669ae85627ded221",
+        "deploy/native/busybox.lock.json": "680a71b07330f92b095dff8dba35c1c97fc497f0b926417050485fb2a9276f01"
+      },
+      "regression_execution": "Execute rebuilt wget against loopback regression server; reject99 unsafe raw URL variants before connect, accept6 valid/encoded/redirect requests, refuse2 invalid redirects; compare complete applet list."
+    },
+    {
+      "component": "CPython",
+      "version": "3.12.16",
+      "advisory": "CVE-2025-15366",
+      "upstream_patch_url": "https://github.com/python/cpython/commit/71926d943c05bde79bd2a866933103541d91b6a2.patch",
+      "upstream_patch_sha256": "ef3e6ea1e797e4376bbcb7a3e53c3d6ffd8f3e1975ed5bfc9c42b9045b018ea6",
+      "original_stdlib_sha256": "ab3d485f7ee89deaf132533cd135888326be3c92a88ede79a16fa4c0e4709632",
+      "patched_stdlib_sha256": "095bed01d8fd1a488c2382ae6ad87caaa017e1c3ba570c50cea59bcc33096299",
+      "stdlib_file": "imaplib.py",
+      "files": {
+        "deploy/native/patches/CVE-2025-15366.patch": "ef3e6ea1e797e4376bbcb7a3e53c3d6ffd8f3e1975ed5bfc9c42b9045b018ea6",
+        "scripts/patch_python_stdlib.py": "08f8fc676528c632d5bcb291aba7d889013c735b4ad7342ce9ed3cb49567b4a0"
+      },
+      "regression_execution": "97 offline behavior cases exercise the four installed patched modules during the final image build; exact source hashes and tests are mandatory even with Python optimization enabled."
+    },
+    {
+      "component": "CPython",
+      "version": "3.12.16",
+      "advisory": "CVE-2025-15367",
+      "upstream_patch_url": "https://github.com/python/cpython/commit/b234a2b67539f787e191d2ef19a7cbdce32874e7.patch",
+      "upstream_patch_sha256": "606aa1bd8124cb0d777744dfe1a89d1ba983638115372cc508f4ed4a154f3abf",
+      "original_stdlib_sha256": "e1596878e408b1702dea74ca55f13b367f93b12fd9950fc62f70d8e7b47fce83",
+      "patched_stdlib_sha256": "d61b5c998036b0c0a947e8d587a24bd55890dde6bcd990a3aeae479fed493931",
+      "stdlib_file": "poplib.py",
+      "files": {
+        "deploy/native/patches/CVE-2025-15367.patch": "606aa1bd8124cb0d777744dfe1a89d1ba983638115372cc508f4ed4a154f3abf",
+        "scripts/patch_python_stdlib.py": "08f8fc676528c632d5bcb291aba7d889013c735b4ad7342ce9ed3cb49567b4a0"
+      },
+      "regression_execution": "97 offline behavior cases exercise the four installed patched modules during the final image build; exact source hashes and tests are mandatory even with Python optimization enabled."
+    },
+    {
+      "component": "CPython",
+      "version": "3.12.16",
+      "advisory": "CVE-2026-6019",
+      "upstream_patch_url": "https://github.com/python/cpython/commit/76b3923d688c0efc580658476c5f525ec8735104.patch",
+      "upstream_patch_sha256": "83800265bb9cb0bc16eb5bd1b6582d926654a1e1483d073b47e29b4576f9313c",
+      "original_stdlib_sha256": "6387f676095ae5374943eff99fbcd2d9c681172c00209fadf54c311cf7228149",
+      "patched_stdlib_sha256": "e98b941e6084e00f6bda5971178d714a4102189d2849c1c81bebddb088ef9f51",
+      "stdlib_file": "http/cookies.py",
+      "files": {
+        "deploy/native/patches/CVE-2026-6019.patch": "83800265bb9cb0bc16eb5bd1b6582d926654a1e1483d073b47e29b4576f9313c",
+        "scripts/patch_python_stdlib.py": "08f8fc676528c632d5bcb291aba7d889013c735b4ad7342ce9ed3cb49567b4a0"
+      },
+      "regression_execution": "97 offline behavior cases exercise the four installed patched modules during the final image build; exact source hashes and tests are mandatory even with Python optimization enabled."
+    },
+    {
+      "component": "CPython",
+      "version": "3.12.16",
+      "advisory": "CVE-2026-103995",
+      "upstream_patch_url": "https://github.com/python/cpython/commit/2eb2af805c156ca52b316bb4ced5e0ab3971d0ae.patch",
+      "upstream_patch_sha256": "1f8d0ef8eb56798b2c8c98b47f449ce8f6f89af3c44729e143168f840a103b85",
+      "upstream_followup_url": "https://github.com/python/cpython/commit/9f52b443c002cccfb54bda0706a9276b6b4a109d.patch",
+      "upstream_followup_sha256": "62e99aa3d79c55847bb9c600a66c4e922390dfc1eeba41ee0fe2be3e14b2ea09",
+      "original_stdlib_sha256": "c2c0694155837d72fc710a4138e5d1e53ae1a652b117a2e23a5b1b0db527a0f9",
+      "patched_stdlib_sha256": "49c6ad24d743d0c4b4535a639b96bea18310ee23e0f3f38bf24f3b28903525d0",
+      "stdlib_file": "http/client.py",
+      "adaptation": "Apply upstream response framing validation and its optional SP/HTAB compatibility follow-up at the CPython3.12 context; reject malformed Content-Length and chunk-size grammars before integer conversion.",
+      "files": {
+        "deploy/native/patches/CVE-2026-103995.patch": "1f8d0ef8eb56798b2c8c98b47f449ce8f6f89af3c44729e143168f840a103b85",
+        "deploy/native/patches/CVE-2026-103995-followup.patch": "62e99aa3d79c55847bb9c600a66c4e922390dfc1eeba41ee0fe2be3e14b2ea09",
+        "scripts/patch_python_stdlib.py": "08f8fc676528c632d5bcb291aba7d889013c735b4ad7342ce9ed3cb49567b4a0"
+      },
+      "regression_execution": "97 offline behavior cases include15HTTP framing regressions and run against all four exact installed patched modules during image build."
+    }
+  ]
+}

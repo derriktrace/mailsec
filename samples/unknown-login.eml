@@ -1,0 +1,13 @@
+From: Account team <account@unfamiliar-service.example>
+To: analyst@example.org
+Subject: Please review your account
+Date: Mon, 28 Sep 2026 10:02:00 +0000
+Message-ID: <synthetic-unknown-login@mailsec.example>
+X-Mailsec-Synthetic: true
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Please sign in at https://unfamiliar-service.example/login to review your acc=
+ount. There is no supplied account relationship or information about who init=
+iated this request.

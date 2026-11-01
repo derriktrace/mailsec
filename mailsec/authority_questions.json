@@ -1,0 +1,20 @@
+{
+  "authority_relationship": {
+    "type": "choice",
+    "instructions": "Assess the CURRENT author\u2019s claimed role against the actual sender, reply-to, receiver authentication and action destinations. action_observations are fallible action estimates, not fraud findings. A normal provider notice from its coherent brand domain can have supported authority without prior history or a configured vendor list. Authentication alone proves only domain control. Does this author claim to be an organization that the sending identity contradicts? Consider body and attachment issuer claims, not just display name. Distinguish an official merchant invoice from an independent seller accepting payment through a platform. Explicit forwarding, independent reselling, and small-business use of personal email can be coherent. Sender-claimed partnerships, copied logos, and safety advice do not verify authority. Missing reputation/history or unknown recipient initiation alone does not establish an identity issue.",
+    "criteria": {
+      "coherent": "The current author\u2019s identity and claimed role are coherent with the sender and request. No material contradictory identity evidence. This includes recognizable legitimate provider domains, explicit individual suppliers, resellers and forwarders.",
+      "contradicted": "The actual sender or consequential destination contradicts the author\u2019s claimed official role: for example a personal mailbox claiming to be a different major company\u2019s billing department, a misleading brand lookalike, or an unrelated organization impersonating an official security/firmware service.",
+      "unresolved": "A specific requested payment, software execution, wallet operation or account-control action relies on a materially unsubstantiated claimed authority or destination; coherent provider/individual identity is insufficiently established. Generic missing enrichment alone does not qualify.",
+      "no_authority_claim": "No official or consequential authority is claimed."
+    }
+  },
+  "current_request_risk": {
+    "type": "noul",
+    "instructions": "Does this current message draw the recipient into a consequential action whose authority or destination is specifically contradicted or materially unresolved in the supplied evidence? Consider callback routes for branded charges, payment instruments, running code, wallet permissions and account-control links. Do not count merely delivered credentials/codes, quoted warnings, passive logos, or a coherent legitimate service notice. A normal sensitive action at the coherent provider\u2019s own service is not by itself an unresolved risk. Missing scans/history alone is neutral.",
+    "criteria": {
+      "true": "A current consequential request depends on a contradicted or materially unresolved identity or route.",
+      "false": "No such current request; the communication is coherent, merely informational, quoted, or only generically uncertain."
+    }
+  }
+}

@@ -1,0 +1,1061 @@
+{
+  "format": 1,
+  "purpose": "Sanitized source export; no upload, deployment, or accuracy claim",
+  "checks": {
+    "credential_patterns": "passed",
+    "private_marker_count": 5,
+    "gitleaks": "passed"
+  },
+  "files": [
+    {
+      "path": ".dockerignore",
+      "sha256": "169544ce956bc35686796d1a35eb51a454951abf4602887294cc996db771dd08",
+      "bytes": 344
+    },
+    {
+      "path": ".env.example",
+      "sha256": "a3c3e3639a49eef3130e93b3ef121da771d5b89c42101ff770af84d6ba65c173",
+      "bytes": 888
+    },
+    {
+      "path": ".github/dependabot.yml",
+      "sha256": "408abbeb3fb78cce167b200431268e3cc47b40b7b6ba0f158c9a819a571bde99",
+      "bytes": 193
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "6ce0f21e7954183777558954620af604a7b9733cf139844cad15344299cb2476",
+      "bytes": 10918
+    },
+    {
+      "path": ".github/workflows/publish-alpha-image.yml",
+      "sha256": "38f6819a57bc078f0b6e0f68c06aa1ee6889e0b4b71cfb139bc5c947b158937b",
+      "bytes": 7231
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "4706106e1a4fcb13b393f2f88c818aadef25830934e30b7494f0a6d174497dc1",
+      "bytes": 278
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "5fc4dc6f8155ca25bccee3e9d4295aab9a79b176b0da3f9eaf24b044d8a80f1a",
+      "bytes": 8491
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256": "ef5bf95c368f409ec581a5c0535340d28d4ebf1b0edf236865879cfe3cc27056",
+      "bytes": 6395
+    },
+    {
+      "path": "Dockerfile",
+      "sha256": "ab21018799dc8e8e6071f77f38075e40ad24d9052432e5da095c959d97945d24",
+      "bytes": 6284
+    },
+    {
+      "path": "Dockerfile.selfhost",
+      "sha256": "ab21018799dc8e8e6071f77f38075e40ad24d9052432e5da095c959d97945d24",
+      "bytes": 6284
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+      "bytes": 10174
+    },
+    {
+      "path": "NOTICE",
+      "sha256": "ff028d9069a8c983d9b53edc960cfeaf79abb271068d1abe8d2a6d587e4e2cee",
+      "bytes": 551
+    },
+    {
+      "path": "README.md",
+      "sha256": "4c7112ae8ebd66f3a04c6dcebbf23d168f1e31e41850e18d9af3a2942167369c",
+      "bytes": 12070
+    },
+    {
+      "path": "SECURITY.md",
+      "sha256": "15dab40674ea34b45b8a31db91e23f5a3e0bc1cbebe04ea847911a23a9a28d35",
+      "bytes": 12634
+    },
+    {
+      "path": "THIRD_PARTY_NOTICES.md",
+      "sha256": "13550cf1d4628a661edb6fb48674df37116438121edbe387905c9fef9bc0f4dc",
+      "bytes": 5129
+    },
+    {
+      "path": "compose.selfhost.yaml",
+      "sha256": "629a1cb48d62cffcc735d191f2ea6729447e2179fedd53358348e703aa9f1524",
+      "bytes": 2357
+    },
+    {
+      "path": "compose.yaml",
+      "sha256": "629a1cb48d62cffcc735d191f2ea6729447e2179fedd53358348e703aa9f1524",
+      "bytes": 2357
+    },
+    {
+      "path": "deploy/native/README.md",
+      "sha256": "5e7d57d853cdb0f0080126cafc9bef074199b0b1658270161de928712c827e95",
+      "bytes": 6438
+    },
+    {
+      "path": "deploy/native/busybox.lock.json",
+      "sha256": "680a71b07330f92b095dff8dba35c1c97fc497f0b926417050485fb2a9276f01",
+      "bytes": 34435
+    },
+    {
+      "path": "deploy/native/onenote_path_policy.rs",
+      "sha256": "aa8f1b234b72c28add3276553ce0c6745e62634d3f7a5ee6586772540677a476",
+      "bytes": 4148
+    },
+    {
+      "path": "deploy/native/patches.json",
+      "sha256": "6b1e07458b2afe611861b7eb39493f96d5c3e7a439bc3a1c66b10ae974b90ce3",
+      "bytes": 13395
+    },
+    {
+      "path": "deploy/native/patches/CVE-2025-15366.patch",
+      "sha256": "ef3e6ea1e797e4376bbcb7a3e53c3d6ffd8f3e1975ed5bfc9c42b9045b018ea6",
+      "bytes": 3691
+    },
+    {
+      "path": "deploy/native/patches/CVE-2025-15367.patch",
+      "sha256": "606aa1bd8124cb0d777744dfe1a89d1ba983638115372cc508f4ed4a154f3abf",
+      "bytes": 2297
+    },
+    {
+      "path": "deploy/native/patches/CVE-2026-103995-followup.patch",
+      "sha256": "62e99aa3d79c55847bb9c600a66c4e922390dfc1eeba41ee0fe2be3e14b2ea09",
+      "bytes": 4398
+    },
+    {
+      "path": "deploy/native/patches/CVE-2026-103995.patch",
+      "sha256": "1f8d0ef8eb56798b2c8c98b47f449ce8f6f89af3c44729e143168f840a103b85",
+      "bytes": 5203
+    },
+    {
+      "path": "deploy/native/patches/CVE-2026-6019.patch",
+      "sha256": "83800265bb9cb0bc16eb5bd1b6582d926654a1e1483d073b47e29b4576f9313c",
+      "bytes": 5469
+    },
+    {
+      "path": "deploy/native/patches/CVE-2026-88047.patch",
+      "sha256": "81cfeadb66eaaa62215963f4eb613212da3b153cac3685e1c8b8b6d19a9e6980",
+      "bytes": 8449
+    },
+    {
+      "path": "deploy/native/patches/CVE-2026-88048.patch",
+      "sha256": "21af537b323ccfd44501ec07b54476580c8132499de2bd5014ddbff46cc114dd",
+      "bytes": 8619
+    },
+    {
+      "path": "deploy/native/patches/CVE-2026-88049.patch",
+      "sha256": "b6860ee415aa0f7a5a73d79e8de115f99c09fa66fc010dd7cb7469f4eb10963f",
+      "bytes": 12066
+    },
+    {
+      "path": "deploy/native/patches/CVE-2026-88050.patch",
+      "sha256": "b474e6f65e613143df005f92170e049f08f09144bd64bf1babb548a524d54dbb",
+      "bytes": 7850
+    },
+    {
+      "path": "deploy/native/patches/CVE-2026-88051.patch",
+      "sha256": "fe931cd9ccc6787ef22076d9b12507b6429043e0f7792272bdbc8e3c47cacf41",
+      "bytes": 6742
+    },
+    {
+      "path": "deploy/native/patches/CVE-2026-88052.patch",
+      "sha256": "8bfd76c5dbe80249ad48152d286fc87fcefd8a57129099413a70476321cb7feb",
+      "bytes": 6486
+    },
+    {
+      "path": "deploy/native/patches/CVE-2026-88053.patch",
+      "sha256": "1b80580e4d3e33f9f4d31e3f88cddbf2a7ede75408d2ccc4159ece6acbcd4b46",
+      "bytes": 30082
+    },
+    {
+      "path": "deploy/native/patches/CVE-2026-88054.patch",
+      "sha256": "ca37052968d23df294029148d082f57b6287849303e24688dbb7057df11cbeea",
+      "bytes": 10623
+    },
+    {
+      "path": "deploy/native/sources.lock.json",
+      "sha256": "7acb222e1277d18f305ea19ccd8fe9769293a8aa1335526ebf6f8261fb2d7921",
+      "bytes": 3686
+    },
+    {
+      "path": "deploy/selfhost/clamd.conf",
+      "sha256": "5e60e2cbc60d4b462a7e9bb664c4bf60036c8378de842c47f07c0d8d9ea21203",
+      "bytes": 364
+    },
+    {
+      "path": "deploy/selfhost/freshclam.conf",
+      "sha256": "511d762feff171d9e9a9f0c0ed8e85376a7cb2eb0e15ed9cedefe467042b9016",
+      "bytes": 167
+    },
+    {
+      "path": "deploy/selfhost/organization.example.yaml",
+      "sha256": "bedb12b8cd931d02e8414e2e84ec74279ad29aa70fbb87d2ae92d168025635bc",
+      "bytes": 364
+    },
+    {
+      "path": "deploy/selfhost/postgres-archive-key.asc",
+      "sha256": "0144068502a1eddd2a0280ede10ef607d1ec592ce819940991203941564e8e76",
+      "bytes": 4812
+    },
+    {
+      "path": "deploy/selfhost/postgresql.conf",
+      "sha256": "32eed880e843a9f6b3029d1d24fe1e7047ad8933f8efa20fbb4000197d8680f0",
+      "bytes": 314
+    },
+    {
+      "path": "docs/analysis-pipeline.md",
+      "sha256": "056c5e56ef2e83d1c9df9ec0f9b4e3674bde6fd7da510aa31641b6c7b12b30b4",
+      "bytes": 9573
+    },
+    {
+      "path": "docs/architecture.md",
+      "sha256": "e8784caaf6795c5ec9c6442b6b01648ba4fc492f867280152a853b164e45f13f",
+      "bytes": 21843
+    },
+    {
+      "path": "docs/data-sharing.md",
+      "sha256": "b74707accdfa9a4e90cb082002b20d20bdf130f8cce0573a28b5f6ad93f2c0cc",
+      "bytes": 13826
+    },
+    {
+      "path": "docs/detection-questions.md",
+      "sha256": "a0681a29644399031f069ab00a31a94940cc0d5155f527962bb37259dcce8384",
+      "bytes": 12098
+    },
+    {
+      "path": "docs/gmail-setup.md",
+      "sha256": "2556dc3f0096464b3f04138b1522d8464c8b99447866f18157c67bd65c7d3099",
+      "bytes": 12429
+    },
+    {
+      "path": "docs/local-models.md",
+      "sha256": "49b3da81f23a3437dfb96dc840aa2f1052368cd9e0fc42ea1b590899938a52fe",
+      "bytes": 12670
+    },
+    {
+      "path": "docs/migration.md",
+      "sha256": "bfb7f5e58b08e4beb0abd32ac7eb96000783c41c5be3bb0a37421d9cd1cbf174",
+      "bytes": 8616
+    },
+    {
+      "path": "docs/public-alpha-release.md",
+      "sha256": "7e97642ddcb6fed3e6e8723b861b958fc39c0aa3165cfe7a29f5d0c96a9fa096",
+      "bytes": 11203
+    },
+    {
+      "path": "docs/release-validation.md",
+      "sha256": "e0d2395dc078a64348e7bde6edfeb6697f77f0a5c645f81e2ff070be9b96b9a3",
+      "bytes": 10173
+    },
+    {
+      "path": "docs/security-review.md",
+      "sha256": "01053f47982042167cecaf148c3e1afd6e40d9ecdb10224a4d82ec95bd0285b0",
+      "bytes": 14873
+    },
+    {
+      "path": "docs/self-hosting.md",
+      "sha256": "bea01df9edfb985406a324d6f4698f0c201a5d3815a74bec6872172ba3a4706f",
+      "bytes": 27676
+    },
+    {
+      "path": "mailsec/__init__.py",
+      "sha256": "c6aadd1c573fe03c96cb1a94a983a664390905399ed5b5e277b10ca9e1ea2e8c",
+      "bytes": 88
+    },
+    {
+      "path": "mailsec/accounts.py",
+      "sha256": "e2debe4b68b7f022b7caeb85f5ca3e1f1ec21d4ec6de99b3dd72ef860706ce13",
+      "bytes": 30639
+    },
+    {
+      "path": "mailsec/action_evidence.py",
+      "sha256": "cbe52331d3e159714007bc2326a1e87edd255a903411115d9a9b7ab55fef7472",
+      "bytes": 17647
+    },
+    {
+      "path": "mailsec/action_questions.json",
+      "sha256": "ffefe44fc6bfda88e931562dfa2c65a6e41ec8f0addba2fcc532009c3cc95563",
+      "bytes": 3781
+    },
+    {
+      "path": "mailsec/action_review.py",
+      "sha256": "4f51c51c790a295cb37953e59306dfd282fc9ce42f0885f26a9678bef8fdb95e",
+      "bytes": 10457
+    },
+    {
+      "path": "mailsec/api.py",
+      "sha256": "303acc9000ca0cba9afe38226b37227022fe9ad46666de66ce49f90ca4d8a892",
+      "bytes": 17220
+    },
+    {
+      "path": "mailsec/authority_questions.json",
+      "sha256": "33340a0bf0ffc9f0e3b292fb9e7cabdae4f7949d7dc3fef2b511e66f4ec18aeb",
+      "bytes": 2974
+    },
+    {
+      "path": "mailsec/benchmark.py",
+      "sha256": "a56d1359f0423eb20237ef47bca565ddae0c71ea8308fa99567f5e2a34b6078c",
+      "bytes": 18026
+    },
+    {
+      "path": "mailsec/benchmark_metrics.py",
+      "sha256": "693451adc40d639bbb3f5c9015024531bcd3151e380f6b076c5f65862352a474",
+      "bytes": 9162
+    },
+    {
+      "path": "mailsec/benchmark_report.py",
+      "sha256": "0c54b21fb7fa33328c64726145568dffb9af30ccbf8093b64368128f26c459c9",
+      "bytes": 22647
+    },
+    {
+      "path": "mailsec/claim_verification.py",
+      "sha256": "03f2eebc0f02c3307b4c8ad3e319c2d8a1e4963804847f2a16e5a4ef2ec13139",
+      "bytes": 11780
+    },
+    {
+      "path": "mailsec/cli.py",
+      "sha256": "8fd797522e25db61717c9263d07b11fe14ee850068c1faf6f8b8866cbcb7c792",
+      "bytes": 6374
+    },
+    {
+      "path": "mailsec/config.py",
+      "sha256": "79eaca3a0c249e8de9b76b1d74084ab1316f6005d9dcc6d865d2381b6a07ec13",
+      "bytes": 10727
+    },
+    {
+      "path": "mailsec/corpus.py",
+      "sha256": "83ee7cdd74f5edb922cb298014f84c1c4bda58afce80eb9fde963d33e7df1caa",
+      "bytes": 3267
+    },
+    {
+      "path": "mailsec/decision.py",
+      "sha256": "049ea1e741e6673b8d55f834859056f822ea990d2fbfd178493ca1d088cdddf2",
+      "bytes": 17541
+    },
+    {
+      "path": "mailsec/demo.py",
+      "sha256": "30a6de55548cf6828767caf1d8ab41ab083485bba74369f6d685bf8a7746f097",
+      "bytes": 2415
+    },
+    {
+      "path": "mailsec/enrichment.py",
+      "sha256": "33096048d117f2932fc189262c9dbf52f84af9e995b7beb03d7aeab9a1ab454c",
+      "bytes": 15388
+    },
+    {
+      "path": "mailsec/evaluation_worker.py",
+      "sha256": "5fec5127c5ba112bc05c4f917d3a38ccd54f5d9321d7f07e95735a25e59fead3",
+      "bytes": 1361
+    },
+    {
+      "path": "mailsec/gmail.py",
+      "sha256": "7cd6e3f72e3bda4f87dd4cc6842209bd773c92c1b19e9b2a189e51e5639dba48",
+      "bytes": 25542
+    },
+    {
+      "path": "mailsec/html_visibility.py",
+      "sha256": "294b81fe44ac5142780218ec846eb4395d35ca9f1984eb33bc6f11be6c57e032",
+      "bytes": 18695
+    },
+    {
+      "path": "mailsec/http_security.py",
+      "sha256": "1047aedab227f27e1767eb120d49dd06a70929e5c83a16cb5baf4c452e389ec1",
+      "bytes": 7013
+    },
+    {
+      "path": "mailsec/import_corpus.py",
+      "sha256": "57b8c143137ff4fc2597cf00dfc31e7891cbec33e92e7fc8f7154b4cbb6779db",
+      "bytes": 3026
+    },
+    {
+      "path": "mailsec/inspection/__init__.py",
+      "sha256": "c06d2acdc1c450699439738055c6861c52a63b81d56513de3ab6a7b42b7fee0a",
+      "bytes": 680
+    },
+    {
+      "path": "mailsec/inspection/api.py",
+      "sha256": "40bf172f606cf1a97ae12e2bc325ff72f7b7475e6dceaa55e35e007bfb4f03d6",
+      "bytes": 3728
+    },
+    {
+      "path": "mailsec/inspection/cache.py",
+      "sha256": "d7a0efdb43b016d54fd6360fc8f5359bc76ff85f0dad7ccdecf475c4a4e81275",
+      "bytes": 2477
+    },
+    {
+      "path": "mailsec/inspection/clam_policy.py",
+      "sha256": "325a11551866929cbe160723af07b92a7e6462fe7a0d85b7b89e9af7137526d4",
+      "bytes": 579
+    },
+    {
+      "path": "mailsec/inspection/clamav.py",
+      "sha256": "264784ba32f4f631f7b35579724f6c94942ea1ddaff4a965f3335a0312ac784a",
+      "bytes": 5081
+    },
+    {
+      "path": "mailsec/inspection/documents.py",
+      "sha256": "c582e817a7cf1bb2b201b2af9924d620cc82ce75656753ddae57f7616ae0a2ec",
+      "bytes": 33359
+    },
+    {
+      "path": "mailsec/inspection/ocr.py",
+      "sha256": "75a59fe5d29e01d4799935d7d90623d536db9dfdc524c2df48108397c5c87b7d",
+      "bytes": 4238
+    },
+    {
+      "path": "mailsec/inspection/process_policy.py",
+      "sha256": "6ef046b118a4f48ee7e1a80fbde7fc3f99735ede682035d5b9a58788fbfe1c87",
+      "bytes": 13276
+    },
+    {
+      "path": "mailsec/inspection/service.py",
+      "sha256": "846ace4864e05d53710a6902b8c053e3e1ef8b427a05d640ab6a804571873689",
+      "bytes": 17397
+    },
+    {
+      "path": "mailsec/inspection/settings.py",
+      "sha256": "ed78cc724abd74821bc24657ecc86accfaaa34f1fa0b7943cb4b6694ffb9911a",
+      "bytes": 2430
+    },
+    {
+      "path": "mailsec/inspection/static_scripts.py",
+      "sha256": "d0acd1d56a4bddc29dd50250ea9b57db5c51f4033f9b136148bedb3b2cabfac2",
+      "bytes": 5386
+    },
+    {
+      "path": "mailsec/inspection/worker.py",
+      "sha256": "a16476a4a4f832d813d6a57afcd5f77bd3194c6f3cf9cbb709a95fc5cc2a4707",
+      "bytes": 15575
+    },
+    {
+      "path": "mailsec/inspection_client.py",
+      "sha256": "164fbc3167fe71c190c766dfd277825680e3c5f84708a1f7f745a5e9ff59468b",
+      "bytes": 4257
+    },
+    {
+      "path": "mailsec/jev.py",
+      "sha256": "8155c2e53d709773023be34a3d3ff14b2cb0ef3a7cd837f972158df63d952005",
+      "bytes": 6673
+    },
+    {
+      "path": "mailsec/jev_evidence.py",
+      "sha256": "6256003202529669093641ea897a413660cc046a1c293e8bd2c81c7f5275072a",
+      "bytes": 13675
+    },
+    {
+      "path": "mailsec/jev_sections.py",
+      "sha256": "b49b66baab47cdde3af6676af8261e435a3d9142d2dd8832a11b2a11c433f02d",
+      "bytes": 20059
+    },
+    {
+      "path": "mailsec/mailbox_actions.py",
+      "sha256": "cdcf99da6bdc637b2f1e1f9e909ed1e612ea12ea839321963df50811941af098",
+      "bytes": 34570
+    },
+    {
+      "path": "mailsec/manual_actions.py",
+      "sha256": "e5b2f9290e0d5ba380b8634a4697d77238e040234c52daefaaf8060ad6023e64",
+      "bytes": 16132
+    },
+    {
+      "path": "mailsec/model_setup.py",
+      "sha256": "e9630d2438324897c2b6e0e5529a8d66fee335adc26f10432d3b2634590f6f78",
+      "bytes": 10630
+    },
+    {
+      "path": "mailsec/outbound.py",
+      "sha256": "5458899eb80b233fdc527181ad14c6708ce9d910b0393387f4740eb3df0ae293",
+      "bytes": 1917
+    },
+    {
+      "path": "mailsec/parsing.py",
+      "sha256": "e03457869de0ec566ad2bf5d58b1ea5db546ed8f97845308039020571bb6a77b",
+      "bytes": 24179
+    },
+    {
+      "path": "mailsec/pipeline.py",
+      "sha256": "e35aa9794d7a34edefd0ef9248a6b56f496f6743b33d5c0755e7614a5b5f6baa",
+      "bytes": 17417
+    },
+    {
+      "path": "mailsec/protection.py",
+      "sha256": "3770e1365783ef78f94e5e090511e83606964ba521de75864cb5d6394d1f4d4b",
+      "bytes": 18108
+    },
+    {
+      "path": "mailsec/provider_consent.py",
+      "sha256": "f4a4577e7d9b1802a21e544df3e3b9c08cfec81c1597519eb5ec34d6d219b01f",
+      "bytes": 16132
+    },
+    {
+      "path": "mailsec/provider_redaction.py",
+      "sha256": "dcf71c0943b56671d35785435522b2cf59d7f405fbb8d65f049797ee6c6b655a",
+      "bytes": 9621
+    },
+    {
+      "path": "mailsec/question_settings.py",
+      "sha256": "29f33e5d290d6c11ce0fa1f1a772193eebe2b36a7695025a91b90ab113009984",
+      "bytes": 31422
+    },
+    {
+      "path": "mailsec/questions.json",
+      "sha256": "5ded564ef361c179d9c31400a0441d99ed61793753db59265cd0f747c06cff81",
+      "bytes": 13136
+    },
+    {
+      "path": "mailsec/reputation.py",
+      "sha256": "69bc209b9853d001355a4538aa3fefee5bfbf1c2f08a678eac02d67da44ba985",
+      "bytes": 7448
+    },
+    {
+      "path": "mailsec/runtime_controls.py",
+      "sha256": "cc5031aacfdd21cb4130adc22fd592b4332de9d1671ea6e48d91429813236dea",
+      "bytes": 3192
+    },
+    {
+      "path": "mailsec/runtime_http.py",
+      "sha256": "44eaa25c818a8ee0e889c4067ab923a3a6e4472029485d44c6c67d06b3bf550b",
+      "bytes": 1175
+    },
+    {
+      "path": "mailsec/security_cache.py",
+      "sha256": "59d3cf65eeb9fab86e997c182efb73478d7ec2e07f7d6e570e4ad58d686a72ff",
+      "bytes": 4750
+    },
+    {
+      "path": "mailsec/static/app.js",
+      "sha256": "e184ef70f8d2a5c489d53c39319637670adab0dd6cf2c13cbb8bb88004ae1666",
+      "bytes": 118491
+    },
+    {
+      "path": "mailsec/static/index.html",
+      "sha256": "c197d66b2652910a31cb5151f098927cb091bbda6d1a10ec3f2deaf1c091c567",
+      "bytes": 10188
+    },
+    {
+      "path": "mailsec/static/onboarding.js",
+      "sha256": "6c2b1287753ea37f56aaa27059db4da7a035e33b9deb9e937dd1993161b8840a",
+      "bytes": 27620
+    },
+    {
+      "path": "mailsec/static/question-editor.js",
+      "sha256": "06322c20970368564ae6473deca07e4f104398136608e318302690b32fe5cd80",
+      "bytes": 38182
+    },
+    {
+      "path": "mailsec/static/style.css",
+      "sha256": "f1eb757f70dde414150b3e70b84ecaf72af6c1b2e34fda1959765e248bfec41e",
+      "bytes": 66871
+    },
+    {
+      "path": "mailsec/storage.py",
+      "sha256": "3f181fc27bc95fe7aca1e952d3b8c8344103ec8e3bf4f59ba1bae0d4ae8562d7",
+      "bytes": 31681
+    },
+    {
+      "path": "mailsec/worker.py",
+      "sha256": "544fba072b0b03f4682e4cb0654e51388bf28fa35040d74d2598aa6065edee76",
+      "bytes": 4658
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "0dc0316f04612edc46a8409ee334d6974635ce5be3468dff677edd874630e9b1",
+      "bytes": 1218
+    },
+    {
+      "path": "requirements-inspection.lock",
+      "sha256": "3e694b90adc15fdb83840d37c4f9d894c55542f688e5ba2811301c7c0525eb22",
+      "bytes": 468
+    },
+    {
+      "path": "requirements.lock",
+      "sha256": "a091dc08d42971769b2289e4bfd525f93348231d44c03937829347a7e3beabcb",
+      "bytes": 680
+    },
+    {
+      "path": "samples/banking-change.eml",
+      "sha256": "02e08c2717f42f2946693913af51d40cd63ae9bc1acd67e5557b2803ad5b4446",
+      "bytes": 582
+    },
+    {
+      "path": "samples/legitimate-code.eml",
+      "sha256": "99a61fe522bbcea862be08ffbc99b157e90c0899d7d0c69886f1276803c4cd74",
+      "bytes": 571
+    },
+    {
+      "path": "samples/marketing.eml",
+      "sha256": "0f22f2954b82f41902549f64f941c77657b2600d2353f93bb71528d7005a53e8",
+      "bytes": 488
+    },
+    {
+      "path": "samples/mfa-theft.eml",
+      "sha256": "f0d09a04b964f35a6adba0fcc61062d8b0db2560807c3cb0c6af3e0204e09c6f",
+      "bytes": 556
+    },
+    {
+      "path": "samples/receipt.eml",
+      "sha256": "15c939215fe98f81b5918d828fe3584ffe1da6c12dab6cb59a18f41947b65e58",
+      "bytes": 432
+    },
+    {
+      "path": "samples/unknown-login.eml",
+      "sha256": "4439cebe295d10faeb59c28cb8797527c0adc7fba4cb7f1ea6f33d8fe6af06e3",
+      "bytes": 517
+    },
+    {
+      "path": "scripts/action_counterexamples.py",
+      "sha256": "466d9cf0191f3f806f1713bfccee29fb4ec8db657e57093449b8a56bea8c15f6",
+      "bytes": 3819
+    },
+    {
+      "path": "scripts/build_busybox.sh",
+      "sha256": "8c16e849557fa0bf83cb925ff17bbe7a7dd70d19443709db76517be64ca1ddc2",
+      "bytes": 4221
+    },
+    {
+      "path": "scripts/build_native.sh",
+      "sha256": "26b2c50cc94a50cf427f3c8647748cedc67560f4109e733a82e3c2580576da7b",
+      "bytes": 4047
+    },
+    {
+      "path": "scripts/check_busybox_wget.py",
+      "sha256": "59616cfcc1e8c29008636f8824b73a9dda5fe31cfb43d7e6669ae85627ded221",
+      "bytes": 4350
+    },
+    {
+      "path": "scripts/check_public_alpha.py",
+      "sha256": "342026d4fcba21a7b1b167929da4dacd68c5b5c1d6f210dde87697974c39864c",
+      "bytes": 7682
+    },
+    {
+      "path": "scripts/container_backup.py",
+      "sha256": "2e06aecc94fb0ce041a5ed4403ba78c9747e0c03d7e20d500850bafeee293a39",
+      "bytes": 3939
+    },
+    {
+      "path": "scripts/container_health.py",
+      "sha256": "56dfaf46830283fb2e53e83a8f5a1ab042d193619ef78dfd98cf0d899035781c",
+      "bytes": 1944
+    },
+    {
+      "path": "scripts/container_runtime.py",
+      "sha256": "12af82e4fac1d8654b9e52d1ac76bfed2061d5d69cba29ba107f66084f165cb9",
+      "bytes": 21425
+    },
+    {
+      "path": "scripts/export_release.py",
+      "sha256": "f74393ba80325c0675b8577c1d90c3260141f237c0f579ec817e7a56b744d0a1",
+      "bytes": 15003
+    },
+    {
+      "path": "scripts/fetch_native.py",
+      "sha256": "6db2d3f6df8071f5f8bc8349745f2f57d0d4df36f2ff8b9948351f351e75958a",
+      "bytes": 3356
+    },
+    {
+      "path": "scripts/migrate_selfhost.py",
+      "sha256": "1bea10a4b252e2a10a151978c432bc55b038c5d41a47639106ca9d4d54fc52cd",
+      "bytes": 18975
+    },
+    {
+      "path": "scripts/migrate_sqlite.py",
+      "sha256": "f934febe546dc0e4f0edacde1ee06143b102bd0fd12832e67354906f01158fa5",
+      "bytes": 10551
+    },
+    {
+      "path": "scripts/native_inventory.py",
+      "sha256": "15bac74e1bd16572540afeb37f0ac956f33c525c8a6b171783497589cb219c7b",
+      "bytes": 2485
+    },
+    {
+      "path": "scripts/patch_busybox_wget.py",
+      "sha256": "f30ebb7b69bf9d627a86b213182e96f726334da56269c9334a12c806b17f55f2",
+      "bytes": 3304
+    },
+    {
+      "path": "scripts/patch_clamav_loopback.py",
+      "sha256": "cc561c4ab48c210f7e14c651fc30007162d529c49a6b2f74ef76dce772ee03c5",
+      "bytes": 1361
+    },
+    {
+      "path": "scripts/patch_clamav_onenote.py",
+      "sha256": "d015d54445f7e7d859973529bedd64556e6dd96c5c7a6ac48039d67320dc95a1",
+      "bytes": 1955
+    },
+    {
+      "path": "scripts/patch_clamav_rand.py",
+      "sha256": "5a4fb889fdbfaaade22aff5746abeffbfe7e3302a62b348015ce594c44b2a465",
+      "bytes": 2148
+    },
+    {
+      "path": "scripts/patch_python_stdlib.py",
+      "sha256": "08f8fc676528c632d5bcb291aba7d889013c735b4ad7342ce9ed3cb49567b4a0",
+      "bytes": 15192
+    },
+    {
+      "path": "scripts/publish_evidence_regression.py",
+      "sha256": "04a261bc14f924e6cff36524900b92f1b28f8c79ab3b2b3c90d1fa8b0ec037a8",
+      "bytes": 5740
+    },
+    {
+      "path": "scripts/setup_selfhost.py",
+      "sha256": "c764c3f59cc8c3dfbe523802c8b2ce054bd7222f94fd9d3d8a349eff10bf1c77",
+      "bytes": 24627
+    },
+    {
+      "path": "selfhost.sh",
+      "sha256": "6827d3a07d265dbd1e4ce7335eaab8dc3675bf887011811f4b73e12f7804118c",
+      "bytes": 292
+    },
+    {
+      "path": "tests/fixtures/account_alert_cases.json",
+      "sha256": "299d2372f22bf8741c07339501e93d26ff2c9562a0a05969c6ceb3ab5cf96157",
+      "bytes": 5315
+    },
+    {
+      "path": "tests/fixtures/action_counterexamples/expectations.json",
+      "sha256": "1d5af9aba0ef1c66c7296894da8631cbadce98283f9d0fbd9eee15580d203ba0",
+      "bytes": 2820
+    },
+    {
+      "path": "tests/fixtures/action_counterexamples/inputs.json",
+      "sha256": "9a4c8612e8838af20ceb55b67c4875325eb67af61f9b695bdef4d4d1646fefa1",
+      "bytes": 12136
+    },
+    {
+      "path": "tests/privacy_helpers.py",
+      "sha256": "4100fa2a9a06fda8d334b9add62eb2642b1ca713bfdfe6846561d355c92d2ea8",
+      "bytes": 2524
+    },
+    {
+      "path": "tests/questions-ui-smoke.mjs",
+      "sha256": "ac56fdff9f8651ae49ec9471be4a20b6ae82421f66e256207a5428e03b559703",
+      "bytes": 30895
+    },
+    {
+      "path": "tests/test_accounts.py",
+      "sha256": "638bc8dd67b054c7695fd0ad143a4999bb84ffcc02e03c2564893f425651b4d1",
+      "bytes": 26163
+    },
+    {
+      "path": "tests/test_action_counterexamples.py",
+      "sha256": "a9894b2cb48303544442cdb37be2f3d5352036201abde2bc2500abda492e57bd",
+      "bytes": 4218
+    },
+    {
+      "path": "tests/test_action_evidence.py",
+      "sha256": "98aede5ba063d1cf7683d229372bd050b241131181ad21267567f4bc90c6a510",
+      "bytes": 11477
+    },
+    {
+      "path": "tests/test_action_review.py",
+      "sha256": "94a0b02891fc1e25caaad8426505e37a4081adf4a87d16325439feaa2ef5982d",
+      "bytes": 10756
+    },
+    {
+      "path": "tests/test_action_review_policy.py",
+      "sha256": "a339124eb08de5e512a6d430fcbc49df6edf3bcd18d78558b13c0d60220246d9",
+      "bytes": 5243
+    },
+    {
+      "path": "tests/test_analyst_overrides.py",
+      "sha256": "4718d61940d5150c8d813866bc2125ddf2173e2702c6e3a658dc68b78bb96c1d",
+      "bytes": 6301
+    },
+    {
+      "path": "tests/test_benchmark_blinding.py",
+      "sha256": "7370e6455143ca4cf8f41ff096a4d3061f39a10af5868b920d6bc671565e092e",
+      "bytes": 3877
+    },
+    {
+      "path": "tests/test_benchmark_metrics.py",
+      "sha256": "fa76276ed78bde19a81eebf313052595b20c94a630caf4fae9ae0d78fe29333f",
+      "bytes": 5456
+    },
+    {
+      "path": "tests/test_busybox_patch.py",
+      "sha256": "e32d95cfc5c3fcd86510bfd6745894e8a270ff83c2acdfd419cfe124be99b3a8",
+      "bytes": 3490
+    },
+    {
+      "path": "tests/test_claim_verification.py",
+      "sha256": "4e1ef924503ed0b849f5c1d6e0481c4f40faa8f87b903ac5c8214174df391442",
+      "bytes": 13319
+    },
+    {
+      "path": "tests/test_clamd_process_policy.py",
+      "sha256": "e93e9eaf5c1e034709a6ae2e7781947100effec31f6388319d522ef1540298de",
+      "bytes": 3287
+    },
+    {
+      "path": "tests/test_container_runtime.py",
+      "sha256": "d0e8226b55d7a4f187ab5f9fcbecdbb0ffb48d1d2875bb020efa7ab17a580be8",
+      "bytes": 14168
+    },
+    {
+      "path": "tests/test_container_startup_readiness.py",
+      "sha256": "b4a0144719f216c80de71cd38c42f70f6b5e3c28536981b3f204278e1e876bc1",
+      "bytes": 5510
+    },
+    {
+      "path": "tests/test_decision_providers.py",
+      "sha256": "4e4eee75f64ed17fbcd77d53bb6c5302f860b891917c92d2ff34d505cd5f8664",
+      "bytes": 16567
+    },
+    {
+      "path": "tests/test_embedded_image_coverage.py",
+      "sha256": "986e16829b5fd74f3f3bca864ad12c5b31c5de75de40d25d7f06413d487e20fc",
+      "bytes": 3762
+    },
+    {
+      "path": "tests/test_encoded_word_coverage.py",
+      "sha256": "9621e413f11bd3baf1cb7caa0aab5997bf80335b34640c1e90084bf932c719bb",
+      "bytes": 5893
+    },
+    {
+      "path": "tests/test_enrichment_coverage.py",
+      "sha256": "2b4c7ced6fe4a419fb6c7b9d87c33ec3e658a37e67a0494a5881f5deb97c6016",
+      "bytes": 6792
+    },
+    {
+      "path": "tests/test_gmail.py",
+      "sha256": "08d7129545f89820e0a2720ffc596c45d72b7cd6cdd6f20b25a2c22d9b3094ef",
+      "bytes": 17266
+    },
+    {
+      "path": "tests/test_gmail_actions.py",
+      "sha256": "9664bba082662f10b9b2cebc05a67515b405577cd4a37a21fc1e064c1fa1f5f5",
+      "bytes": 4568
+    },
+    {
+      "path": "tests/test_gmail_quota.py",
+      "sha256": "965fe8188c34ca0d1a7c0eddde6f4d8e7b176cea07c361614a58f77a752f293c",
+      "bytes": 3763
+    },
+    {
+      "path": "tests/test_html_visibility.py",
+      "sha256": "79100dbbbf609fd7a99f20e9270ca459578e8e709492f1d727ca8bfdf3a78759",
+      "bytes": 11098
+    },
+    {
+      "path": "tests/test_inspection_api.py",
+      "sha256": "ba3d0d65daf21f6e63f5cb440b3e67b72996364ccf48c6b8a76ee795d87e86fb",
+      "bytes": 5995
+    },
+    {
+      "path": "tests/test_inspection_clamav.py",
+      "sha256": "fd2c4608ed90b40515ec0685dfdc725a6793551e45876e69b3c50a82e7ccb62a",
+      "bytes": 3962
+    },
+    {
+      "path": "tests/test_inspection_client.py",
+      "sha256": "cdfb3c4e0fab7adaf53beed8b31b780e8c6a616cb1ec4cc40eec3f8edf76ad5f",
+      "bytes": 1840
+    },
+    {
+      "path": "tests/test_inspection_documents.py",
+      "sha256": "1ce004aa28dee6e3fc1c001d4c25fcf04cc9e0debdc94c30805e4e11a55afaad",
+      "bytes": 17812
+    },
+    {
+      "path": "tests/test_inspection_ocr_static.py",
+      "sha256": "8146e36aa341bdbadce7473852a88cc619de76c4ee63587e01390f643d1b0582",
+      "bytes": 10025
+    },
+    {
+      "path": "tests/test_inspection_service.py",
+      "sha256": "8e6f007ad1e289b8dfeab62c512bb54d0405c5b079b34f4d0adbf4a05b266ea5",
+      "bytes": 8489
+    },
+    {
+      "path": "tests/test_inspection_worker.py",
+      "sha256": "032b16fbf0251b2d70bf1d95f012ac14e3dbb335bd2633e01a4f50fffada8ee6",
+      "bytes": 5770
+    },
+    {
+      "path": "tests/test_jev_evidence.py",
+      "sha256": "821a687cdb66171f077bd38760baa93f16e262291772a7e3fde6b3a6f257bc87",
+      "bytes": 9701
+    },
+    {
+      "path": "tests/test_jev_sections.py",
+      "sha256": "0b0889687f2be3ab6d533745b8c4d102c3ef6b2e4d4bc07178755a5326983938",
+      "bytes": 9569
+    },
+    {
+      "path": "tests/test_mailbox_actions.py",
+      "sha256": "56b0631caf814c4c10dd01880a64b44f049d665e2c9af9f1aca0e242cff67a65",
+      "bytes": 20972
+    },
+    {
+      "path": "tests/test_manual_actions.py",
+      "sha256": "b88cf58b63a8b7edb6a3234e58722b90e33de5db885d4229516d3a0f61287be1",
+      "bytes": 17736
+    },
+    {
+      "path": "tests/test_manual_actions_postgres.py",
+      "sha256": "978c407f4efa626c6f609f904092bca86d389cc74755e9eadda1748649fc2c09",
+      "bytes": 3276
+    },
+    {
+      "path": "tests/test_migration.py",
+      "sha256": "d61c79981013b28639f205be766e36589764be70fc569017114a67325986169f",
+      "bytes": 5802
+    },
+    {
+      "path": "tests/test_mime_transfer_coverage.py",
+      "sha256": "ab5fcbbff8758f5de91a6d9bdf3daff909c9490070b86456b9a6baca5a636e0d",
+      "bytes": 3176
+    },
+    {
+      "path": "tests/test_model_setup.py",
+      "sha256": "2aaaecc86e0bc500a5f100889962057e9e52746e0f169b17bd8749a02da2ead1",
+      "bytes": 7850
+    },
+    {
+      "path": "tests/test_native_supply_chain.py",
+      "sha256": "b3ea6f5ccbf4db0570934d1e49bbf20578d7a843e4306c68d8f207cd7af21903",
+      "bytes": 4368
+    },
+    {
+      "path": "tests/test_outbound_security.py",
+      "sha256": "f2f81434a8aff8474cf59fac36ff96f58c0c848e22e9d5fc95855dcd17ad86e9",
+      "bytes": 19250
+    },
+    {
+      "path": "tests/test_parser_cache_isolation.py",
+      "sha256": "405218f1c64904c8431137b9a29dd621b8f05696d0c42c2d732e31e43a62f828",
+      "bytes": 2935
+    },
+    {
+      "path": "tests/test_parser_process_policy.py",
+      "sha256": "63f1de30bafd3f9df57913e4e86acd5a16455ad68ae668a59733a028ff2b5a84",
+      "bytes": 7141
+    },
+    {
+      "path": "tests/test_parsing.py",
+      "sha256": "383c2afba9c29e29b9a88be8ee073059b33e427baee7f3cef2de246c2161ad41",
+      "bytes": 13813
+    },
+    {
+      "path": "tests/test_peer_resource_isolation.py",
+      "sha256": "1e48010d9427582571ab3493fc636fb136be83e18a2e4e9f94434004d919d745",
+      "bytes": 3049
+    },
+    {
+      "path": "tests/test_pipeline.py",
+      "sha256": "1938704f26ca902667b15b49c7c0b6c5cfc82ae987f219e335ab67b4c42e9811",
+      "bytes": 13775
+    },
+    {
+      "path": "tests/test_pipeline_protection.py",
+      "sha256": "cd1161a7d670350a244d80674a80fdadc981100a0becdcb6420378f142e70660",
+      "bytes": 9241
+    },
+    {
+      "path": "tests/test_postgres.py",
+      "sha256": "d0d8d43df4841cc5023b323bd3266b28473d4c4284b92fb11e07855b5020711a",
+      "bytes": 15877
+    },
+    {
+      "path": "tests/test_postgres_pilot.py",
+      "sha256": "68911a9af599d25ca03a7b53683a2a4cd1a2cefca7ad60906348078ad085871e",
+      "bytes": 8266
+    },
+    {
+      "path": "tests/test_protection.py",
+      "sha256": "974934f5923d919ad635d693140180cc1cd538c2f23de7972be027aa873bc5e7",
+      "bytes": 22345
+    },
+    {
+      "path": "tests/test_provider_consent.py",
+      "sha256": "37fe49d32f677a610d7a3b6e6dfd29bb929b4f82d3243c344c9ac905ff733b79",
+      "bytes": 23092
+    },
+    {
+      "path": "tests/test_provider_redaction.py",
+      "sha256": "66ebbd24975d7739b8341aa90d53379c643b1cadec1ea48b4139377e838dfc61",
+      "bytes": 5989
+    },
+    {
+      "path": "tests/test_public_alpha_check.py",
+      "sha256": "043aeed45f0136e42dc80b65f15e1f97e7c391bfdb64ed68d98b200d0aa8af40",
+      "bytes": 6778
+    },
+    {
+      "path": "tests/test_publish_evidence_regression.py",
+      "sha256": "091b1ea259df4805bb931d949501aa34a635965259fe8f45f352ec3f60c9caf6",
+      "bytes": 6735
+    },
+    {
+      "path": "tests/test_python_stdlib_patches.py",
+      "sha256": "0a954556384f88b856e6c0a7a82b834d037327f6cb769cf973c1bbfbb9c9508e",
+      "bytes": 4172
+    },
+    {
+      "path": "tests/test_question_settings.py",
+      "sha256": "d8d7d5b1e8c548b26f1933bc5bcc820f5859bb100d756d110e22134b128ad0a7",
+      "bytes": 25272
+    },
+    {
+      "path": "tests/test_release_export.py",
+      "sha256": "66c2d8b557a1bbe2f62061d08255399108a058228087edc83795e6870294c599",
+      "bytes": 6631
+    },
+    {
+      "path": "tests/test_reputation_privacy.py",
+      "sha256": "47a1f8d45dc6b89e6ae6bfc56bd552696bc7f3c03c097a607f34744aaee55b7f",
+      "bytes": 1545
+    },
+    {
+      "path": "tests/test_runtime_http_security.py",
+      "sha256": "30d80c8f93525a2130a587f56c49cae3baa200fb235a4e532a77e8b2acad05bf",
+      "bytes": 2403
+    },
+    {
+      "path": "tests/test_scan_recovery.py",
+      "sha256": "1ca7217e9e12abd8203c857c37fa23d4346572e04fa050f61053b02d9446d55b",
+      "bytes": 5183
+    },
+    {
+      "path": "tests/test_security.py",
+      "sha256": "63630b1828ae906edb40b2a49a9fd842e0d24764ee38aa2b8891f86d973fef68",
+      "bytes": 11635
+    },
+    {
+      "path": "tests/test_security_boundaries.py",
+      "sha256": "e0445ad160f2141b89ec73490370fadee3f54a7b25d30c4773b026af7f5ce166",
+      "bytes": 5606
+    },
+    {
+      "path": "tests/test_selfhost_migration.py",
+      "sha256": "7e58eb01b825357a8ec14721aea71d087896455e57372de6394123e1cc636786",
+      "bytes": 11772
+    },
+    {
+      "path": "tests/test_selfhost_setup.py",
+      "sha256": "d46df9330fb0acd19d08a4cd703f41477b62e1a2fe78ede2b33778bbed4afedb",
+      "bytes": 15628
+    },
+    {
+      "path": "tests/test_worker.py",
+      "sha256": "7b22c262ea0b0ce313ad094f954f9054c527f13a3eb2b3b5f4c983fce9ae781b",
+      "bytes": 17352
+    },
+    {
+      "path": "tests/test_workspaces.py",
+      "sha256": "e78f732308f796d53cbcab2f3e059346acac27b7e6d3e2cdc19aac8a42c08aa8",
+      "bytes": 8134
+    },
+    {
+      "path": "tests/ui-smoke.mjs",
+      "sha256": "4a59643971f75b9cb6976c58eb0550c995112f4e44cf5760a49f99e5b8ba60cc",
+      "bytes": 68262
+    }
+  ]
+}

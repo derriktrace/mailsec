@@ -1,0 +1,21 @@
+{
+  "kind": "Synthetic development controls, not independent accuracy validation; model predictions must be frozen before scoring.",
+  "cases": [
+    {"id": "ac01", "scenario": "Genuine brand receipt with verified phone support", "acceptable_verdicts": ["clean"], "pair": "ac02"},
+    {"id": "ac02", "scenario": "Receipt issuer and callback contradict independent vendor record", "acceptable_verdicts": ["suspicious", "phishing"], "pair": "ac01"},
+    {"id": "ac03", "scenario": "Small business using its established Gmail address", "acceptable_verdicts": ["clean"], "pair": "ac04"},
+    {"id": "ac04", "scenario": "Established supplier address requests verification bypass and unrelated payee", "acceptable_verdicts": ["phishing"], "pair": "ac03"},
+    {"id": "ac05", "scenario": "Independent reseller explicitly discloses its own role", "acceptable_verdicts": ["clean"], "pair": "ac06"},
+    {"id": "ac06", "scenario": "Reseller claims manufacturer authority and requests payment secrets", "acceptable_verdicts": ["phishing"], "pair": "ac05"},
+    {"id": "ac07", "scenario": "Forwarded invoice quoted for internal archival; no current payment or callback", "acceptable_verdicts": ["clean"]},
+    {"id": "ac08", "scenario": "Legitimate business PIX request matching independent order", "acceptable_verdicts": ["clean"], "pair": "ac09"},
+    {"id": "ac09", "scenario": "Government authority and mandatory fee contradicted by supplied official terms", "acceptable_verdicts": ["phishing"], "pair": "ac08"},
+    {"id": "ac10", "scenario": "Security newsletter quotes install command with explicit nonexecution context", "acceptable_verdicts": ["clean"], "pair": "ac11"},
+    {"id": "ac11", "scenario": "Impersonated internal IT asks immediate execution and suppresses normal verification", "acceptable_verdicts": ["phishing"], "pair": "ac10"},
+    {"id": "ac12", "scenario": "Authorized recruiting exercise with independent agreement and bounded environment", "acceptable_verdicts": ["clean"], "pair": "ac13"},
+    {"id": "ac13", "scenario": "Unsolicited claimed employer requests personal-repository execution; publisher mismatch", "acceptable_verdicts": ["suspicious", "phishing"], "pair": "ac12", "limitation": "Payload was not inspected; no claim that repository actually contains malware."},
+    {"id": "ac14", "scenario": "Supported device publisher directs built-in update workflow", "acceptable_verdicts": ["clean"], "pair": "ac15"},
+    {"id": "ac15", "scenario": "Unrelated author claims device publisher and replaces supported update workflow", "acceptable_verdicts": ["suspicious", "phishing"], "pair": "ac14", "limitation": "No binary malware finding is supplied."},
+    {"id": "ac16", "scenario": "Official bank transaction alert directs independently stored contact", "acceptable_verdicts": ["clean"]}
+  ]
+}

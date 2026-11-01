@@ -1,0 +1,12 @@
+From: Orders <orders@northwind.example>
+To: analyst@example.org
+Subject: Your order has shipped
+Date: Mon, 28 Sep 2026 10:00:00 +0000
+Message-ID: <synthetic-receipt@mailsec.example>
+X-Mailsec-Synthetic: true
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Your order #1842 has shipped. This is a receipt for an already completed purc=
+hase. No action is required. Thank you.

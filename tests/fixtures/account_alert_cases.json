@@ -1,0 +1,82 @@
+[
+  {
+    "name": "legitimate_security_alert_open_installed_app",
+    "expected": "clean",
+    "sender": "CedarCloud Security <security@cedarcloud.example>",
+    "subject": "New sign-in to your CedarCloud account",
+    "body": "A new device signed in to your CedarCloud account. If this was you, no action is needed. If you do not recognize the sign-in, open the CedarCloud app already installed on your device and choose Settings, then Security, then Recent activity. You can also use your existing saved bookmark. This email has no sign-in link. We will never ask you to reply with a password, recovery code, or payment details.",
+    "organization": {
+      "domains": ["recipient.example"],
+      "known_vendors": {
+        "CedarCloud": {
+          "domains": ["cedarcloud.example"]
+        }
+      }
+    }
+  },
+  {
+    "name": "legitimate_billing_failure_authorized_vendor_destination",
+    "expected": "clean",
+    "sender": "CedarCloud Billing <billing@cedarcloud.example>",
+    "subject": "Your CedarCloud subscription payment did not go through",
+    "body": "Your monthly CedarCloud subscription renewal was declined. To keep your subscription active, update your payment method in the Billing section of the CedarCloud app, or use our billing portal at https://billing.cedarcloud.example/account/payment. Your existing files remain available during the seven-day grace period. If you already updated your payment method, no further action is needed. Do not send card details in an email reply.",
+    "organization": {
+      "domains": ["recipient.example"],
+      "known_vendors": {
+        "CedarCloud": {
+          "domains": ["cedarcloud.example"]
+        }
+      }
+    }
+  },
+  {
+    "name": "unknown_account_login_without_affirmative_deception",
+    "expected": "suspicious",
+    "sender": "Project Harbor <notifications@projectharbor.example>",
+    "subject": "Your Project Harbor account is ready",
+    "body": "An account has been created for this email address in Project Harbor. To view your workspace, sign in at https://app.projectharbor.example/login. If you were not expecting a Project Harbor account, contact the person who invited you before signing in. No password, code, or payment is requested by email.",
+    "organization": {
+      "domains": ["recipient.example"],
+      "known_vendors": {}
+    }
+  },
+  {
+    "name": "generic_cloud_deletion_payment_lure_on_public_file_host",
+    "expected": "phishing",
+    "sender": "Cloud Account Protection <sales@orchard-supplies.example>",
+    "subject": "FINAL WARNING: your cloud photos and files will be erased today",
+    "body": "Cloud Account Protection has blocked your storage account. Your saved photos, backups, and documents will be permanently erased in 12 hours unless you pay the account restoration charge now. Restore your cloud account at https://public-files.example/shared/9f4b2/cloud-account-billing.html. That page is our secure cloud billing verification center: enter your full card number, expiry date, security code, and billing address to stop deletion. Do not use your normal account app because a blocked account cannot be restored there. This urgent restoration offer applies to your existing cloud subscription.",
+    "organization": {
+      "domains": ["recipient.example"],
+      "known_vendors": {}
+    }
+  },
+  {
+    "name": "known_brand_urgent_payment_with_passing_own_domain_authentication",
+    "expected": "phishing",
+    "sender": "CedarCloud Billing <billing@cedarcloud-payments.example>",
+    "subject": "CedarCloud: pay immediately to prevent account deletion",
+    "body": "This is the CedarCloud billing team. Your CedarCloud files will be deleted in two hours unless you pay the emergency account reactivation fee. Go to https://cedarcloud-payments.example/restore and enter your card number, expiry date, and security code. Do not open the regular CedarCloud billing portal; only this special payment link can stop deletion.",
+    "headers": "Received: from mail.cedarcloud-payments.example by mx.workspace.example with ESMTPS; Tue, 1 Sep 2026 12:00:00 +0000\r\nAuthentication-Results: mx.workspace.example; spf=pass smtp.mailfrom=cedarcloud-payments.example; dkim=pass header.d=cedarcloud-payments.example; dmarc=pass header.from=cedarcloud-payments.example\r\nReturn-Path: <billing@cedarcloud-payments.example>\r\n",
+    "organization": {
+      "domains": ["recipient.example"],
+      "trusted_authserv_ids": ["mx.workspace.example"],
+      "known_vendors": {
+        "CedarCloud": {
+          "domains": ["cedarcloud.example"]
+        }
+      }
+    }
+  },
+  {
+    "name": "urgent_unsolicited_marketing_without_sensitive_action",
+    "expected": "spam",
+    "sender": "North Meadow Office Furniture <offers@northmeadow.example>",
+    "subject": "FINAL HOURS: 40% off our office-chair catalog",
+    "body": "Our office-chair sale ends tonight. Browse the North Meadow Office Furniture catalog at https://northmeadow.example/catalog to compare chair colors, dimensions, and sale prices. The catalog is available without registration. Our commercial sales team is introducing this offer to offices in your area. To stop receiving these promotions, use https://northmeadow.example/unsubscribe.",
+    "organization": {
+      "domains": ["recipient.example"],
+      "known_vendors": {}
+    }
+  }
+]
