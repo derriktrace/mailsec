@@ -24,8 +24,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "6ce0f21e7954183777558954620af604a7b9733cf139844cad15344299cb2476",
-      "bytes": 10918
+      "sha256": "2b53e18d81b0c5e51c348b98f65707ace31b3641899c44ef562443c66208d8ab",
+      "bytes": 11051
     },
     {
       "path": ".github/workflows/publish-alpha-image.yml",

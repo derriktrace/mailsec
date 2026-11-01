@@ -43,8 +43,12 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: '22'
-      - name: Install PostgreSQL client build prerequisites
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends gcc python3-dev libpq-dev
+      - name: Install PostgreSQL build, OCR, and PDF test tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            gcc python3-dev libpq-dev poppler-utils tesseract-ocr \
+            tesseract-ocr-eng tesseract-ocr-por tesseract-ocr-spa
       - name: Install pinned application and inspection dependencies
         run: |
           python -m pip install -r requirements.lock -r requirements-inspection.lock
