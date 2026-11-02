@@ -3,7 +3,7 @@
   "purpose": "Sanitized source export; no upload, deployment, or accuracy claim",
   "checks": {
     "credential_patterns": "passed",
-    "private_marker_count": 5,
+    "private_marker_count": 10,
     "gitleaks": "passed"
   },
   "files": [
@@ -24,8 +24,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "sha256": "6d96ace85b41d6a7b77b335e5a4a3807a16e083ecdbea01a3452812e710a44d4",
-      "bytes": 11072
+      "sha256": "81a3cf5e59886ed8a716045991e434a09830e55a6b21be3f158f165c5409a6d2",
+      "bytes": 11215
     },
     {
       "path": ".github/workflows/publish-alpha-image.yml",
@@ -84,12 +84,12 @@
     },
     {
       "path": "compose.selfhost.yaml",
-      "sha256": "629a1cb48d62cffcc735d191f2ea6729447e2179fedd53358348e703aa9f1524",
+      "sha256": "f1ad43d0714cc3a438466afd006d948c8e7688361aea7ddcca7d9ea9c80bfabc",
       "bytes": 2357
     },
     {
       "path": "compose.yaml",
-      "sha256": "629a1cb48d62cffcc735d191f2ea6729447e2179fedd53358348e703aa9f1524",
+      "sha256": "f1ad43d0714cc3a438466afd006d948c8e7688361aea7ddcca7d9ea9c80bfabc",
       "bytes": 2357
     },
     {

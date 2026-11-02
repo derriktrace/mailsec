@@ -40,7 +40,7 @@ services:
     security_opt: ['no-new-privileges:true']
     pids_limit: 256
     mem_limit: 8g
-    cpus: 4
+    cpus: 2
     healthcheck:
       test: ['CMD', 'python', '/opt/mailsec/container_health.py']
       interval: 30s

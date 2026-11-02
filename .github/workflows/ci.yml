@@ -180,6 +180,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Build the complete image and start its bundled database
+        id: build_image
         run: |
           ./selfhost.sh --engine docker --runtime-dir "$RUNNER_TEMP/mailsec-ci" \
             --project-name mailsec-selfhost-ci --port 18026 --database-only --non-interactive
@@ -201,6 +202,7 @@ jobs:
           docker logs --tail 100 "$container"
           exit 1
       - name: Install checksum-verified Trivy
+        id: install_trivy
         shell: bash
         run: |
           set -euo pipefail
@@ -229,7 +231,7 @@ jobs:
           raise SystemExit(any(v["Severity"] in {"HIGH", "CRITICAL"} for v in findings))
           PYTHON
       - name: Generate software bill of materials
-        if: always()
+        if: ${{ always() && steps.build_image.outcome == 'success' && steps.install_trivy.outcome == 'success' }}
         run: |
           "$RUNNER_TEMP/trivy" image --format cyclonedx --no-progress \
             --output "$RUNNER_TEMP/mailsec-sbom.cdx.json" --timeout 10m \
