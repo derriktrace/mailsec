@@ -17,15 +17,25 @@ import os
 import re
 import shutil
 import stat
+import struct
 import subprocess
 import sys
 import tarfile
 import tempfile
+import zlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MAX_FILE_BYTES = 2 * 1024 * 1024
 MAX_TOTAL_BYTES = 20 * 1024 * 1024
+PUBLIC_SCREENSHOTS = (
+    'docs/images/mailsec-synthetic-dashboard.png',
+    'docs/images/mailsec-synthetic-onboarding.png',
+    'docs/images/mailsec-synthetic-setup-model.png',
+    'docs/images/mailsec-synthetic-setup-gmail.png',
+    'docs/images/mailsec-synthetic-setup-protection.png',
+    'docs/images/mailsec-synthetic-investigation.png',
+)
 REQUIRED_FILES = (
     'README.md', 'LICENSE', 'NOTICE', 'THIRD_PARTY_NOTICES.md', 'CHANGELOG.md',
     'SECURITY.md', 'CONTRIBUTING.md', 'pyproject.toml', 'requirements.lock',
@@ -34,7 +44,13 @@ REQUIRED_FILES = (
     '.github/workflows/ci.yml', '.github/workflows/publish-alpha-image.yml', '.github/dependabot.yml',
     'docs/self-hosting.md', 'docs/architecture.md', 'docs/analysis-pipeline.md', 'docs/gmail-setup.md', 'docs/local-models.md', 'docs/migration.md',
     'docs/security-review.md', 'docs/release-validation.md', 'docs/detection-questions.md',
-    'docs/public-alpha-release.md', 'docs/data-sharing.md',
+    'docs/public-alpha-release.md', 'docs/data-sharing.md', 'docs/product-tour.md',
+    'docs/images/mailsec-synthetic-dashboard.png',
+    'docs/images/mailsec-synthetic-onboarding.png',
+    'docs/images/mailsec-synthetic-setup-model.png',
+    'docs/images/mailsec-synthetic-setup-gmail.png',
+    'docs/images/mailsec-synthetic-setup-protection.png',
+    'docs/images/mailsec-synthetic-investigation.png',
     'deploy/selfhost/organization.example.yaml',
     'deploy/selfhost/clamd.conf', 'deploy/selfhost/freshclam.conf', 'deploy/selfhost/postgresql.conf',
     'deploy/selfhost/postgres-archive-key.asc',
@@ -89,6 +105,10 @@ organization.yaml
 *.p12
 *.pfx
 *.mbox
+*.eml
+*.msg
+*.pst
+*.ost
 __pycache__/
 .pytest_cache/
 .ruff_cache/
@@ -130,6 +150,44 @@ class ReleaseError(ValueError):
     """Safe message containing paths or rule names, never matching file contents."""
 
 
+def _validate_public_png(content: bytes, name: str) -> None:
+    """Allow only simple screenshots with no metadata or trailing payload."""
+    if not content.startswith(b'\x89PNG\r\n\x1a\n'):
+        raise ReleaseError(f'Invalid public screenshot: {name}')
+    offset = 8
+    seen_header = seen_data = seen_end = False
+    while offset + 12 <= len(content):
+        size = struct.unpack_from('>I', content, offset)[0]
+        end = offset + 12 + size
+        if end > len(content):
+            break
+        kind = content[offset + 4:offset + 8]
+        payload = content[offset + 8:offset + 8 + size]
+        expected_crc = struct.unpack_from('>I', content, offset + 8 + size)[0]
+        if zlib.crc32(kind + payload) != expected_crc:
+            break
+        if kind == b'IHDR':
+            if seen_header or offset != 8 or size != 13:
+                break
+            width, height = struct.unpack_from('>II', payload)
+            if (width, height) != (1500, 1240):
+                break
+            seen_header = True
+        elif kind == b'IDAT':
+            if not seen_header or seen_end:
+                break
+            seen_data = True
+        elif kind == b'IEND':
+            if not seen_data or seen_end or size != 0 or end != len(content):
+                break
+            seen_end = True
+        else:
+            break
+        offset = end
+    if not seen_end:
+        raise ReleaseError(f'Unexpected metadata or malformed public screenshot: {name}')
+
+
 def read_regular(root: Path, name: str) -> bytes:
     path = root / name
     for parent in (path, *path.parents):
@@ -150,12 +208,15 @@ def read_regular(root: Path, name: str) -> bytes:
         content = stream.read(MAX_FILE_BYTES + 1)
         if len(content) > MAX_FILE_BYTES:
             raise ReleaseError(f'Source file exceeds release size limit: {name}')
-    try:
-        content.decode('utf-8')
-    except UnicodeDecodeError:
-        raise ReleaseError(f'Unexpected binary source file: {name}') from None
-    if b'\x00' in content:
-        raise ReleaseError(f'Unexpected binary source file: {name}')
+    if name in PUBLIC_SCREENSHOTS:
+        _validate_public_png(content, name)
+    else:
+        try:
+            content.decode('utf-8')
+        except UnicodeDecodeError:
+            raise ReleaseError(f'Unexpected binary source file: {name}') from None
+        if b'\x00' in content:
+            raise ReleaseError(f'Unexpected binary source file: {name}')
     return content
 
 

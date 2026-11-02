@@ -21,7 +21,10 @@ def candidate(tmp_path):
     for name in (*REQUIRED, 'mailsec/config.py', 'mailsec/api.py'):
         path = tmp_path / name
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text('Public source fixture\n')
+        if name.startswith('docs/images/'):
+            path.write_bytes((ROOT / name).read_bytes())
+        else:
+            path.write_text('Public source fixture\n')
     (tmp_path / 'pyproject.toml').write_text('[project]\nversion = "0.4.0a5"\n')
     (tmp_path / 'mailsec/config.py').write_text('VERSIONS = {"engine": "0.4.0-alpha.5"}\n')
     (tmp_path / 'mailsec/api.py').write_text('app = FastAPI(version="0.4.0-alpha.5")\n')
@@ -68,6 +71,7 @@ def test_offline_checker_accepts_consistent_source_and_writes_nothing(candidate)
     ('mailsec/config.py', 'VERSIONS={"engine":"0.4.0-alpha.2"}', 'runtime engine matches package version'),
     ('compose.selfhost.yaml', 'image: localhost/mailsec-selfhost:0.4.0-alpha.2', 'Compose image matches package version'),
     ('README.md', '# 0.4.0-alpha.5\n[Missing](docs/no-guide.md)', 'all local Markdown link targets exist within source'),
+    ('README.md', '# 0.4.0-alpha.5\n![Missing](docs/images/no-image.png)', 'all local Markdown link targets exist within source'),
     ('README.md', '# 0.4.0-alpha.5\n[Escape](../private.md)', 'all local Markdown link targets exist within source'),
     ('.github/workflows/ci.yml', 'run: docker push private.invalid/image', 'CI does not publish containers or releases'),
 ])

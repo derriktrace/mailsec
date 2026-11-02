@@ -19,6 +19,10 @@ organization.yaml
 *.p12
 *.pfx
 *.mbox
+*.eml
+*.msg
+*.pst
+*.ost
 __pycache__/
 .pytest_cache/
 .ruff_cache/

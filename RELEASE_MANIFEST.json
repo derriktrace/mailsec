@@ -34,8 +34,8 @@
     },
     {
       "path": ".gitignore",
-      "sha256": "4706106e1a4fcb13b393f2f88c818aadef25830934e30b7494f0a6d174497dc1",
-      "bytes": 278
+      "sha256": "3b578b6c308c29ceda4e4ae0df51dabe3cfc7f6c06ff8c0f157e3d2e03736443",
+      "bytes": 302
     },
     {
       "path": "CHANGELOG.md",
@@ -69,8 +69,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "a6a27cb775523f92e98b166692c75aa1f430d14691a1f2317edc4d935d287b71",
-      "bytes": 12066
+      "sha256": "6945a9d53ed3bb901746b739f9f8bffce68bdbf5790e0e760b01ac1a60edd725",
+      "bytes": 13983
     },
     {
       "path": "SECURITY.md",
@@ -233,6 +233,36 @@
       "bytes": 12429
     },
     {
+      "path": "docs/images/mailsec-synthetic-dashboard.png",
+      "sha256": "54126ef8ae97b88e9e4196e2b54b59f9125c888f8285645614fbcbfad5744ae2",
+      "bytes": 182246
+    },
+    {
+      "path": "docs/images/mailsec-synthetic-investigation.png",
+      "sha256": "f148eace567df8dab641a83c698d8bcdc59071058297f5f239c253cd6026859e",
+      "bytes": 210917
+    },
+    {
+      "path": "docs/images/mailsec-synthetic-onboarding.png",
+      "sha256": "cab13ab5e8a59e898780c882432ec409d66df7db1e693fd86817e8fccdccbf77",
+      "bytes": 151972
+    },
+    {
+      "path": "docs/images/mailsec-synthetic-setup-gmail.png",
+      "sha256": "880cac71ed84ef1b6c41b0b017fcaa972ae310c042f9a36cc07fe97c4348dfc8",
+      "bytes": 201243
+    },
+    {
+      "path": "docs/images/mailsec-synthetic-setup-model.png",
+      "sha256": "7d854f7862b9414013775b87298ef0ff2b25712f2f606a69035ced25a97fb1f1",
+      "bytes": 193832
+    },
+    {
+      "path": "docs/images/mailsec-synthetic-setup-protection.png",
+      "sha256": "a46e98f6cfbeac7dd94ba25b5d8fbf3f8c746a9657713a12f34a2b961225dadb",
+      "bytes": 133031
+    },
+    {
       "path": "docs/local-models.md",
       "sha256": "49b3da81f23a3437dfb96dc840aa2f1052368cd9e0fc42ea1b590899938a52fe",
       "bytes": 12670
@@ -241,6 +271,11 @@
       "path": "docs/migration.md",
       "sha256": "bfb7f5e58b08e4beb0abd32ac7eb96000783c41c5be3bb0a37421d9cd1cbf174",
       "bytes": 8616
+    },
+    {
+      "path": "docs/product-tour.md",
+      "sha256": "206193f598232a23828c9b4ba57620a64ea967f425ef608cf2552b382d61c33b",
+      "bytes": 11461
     },
     {
       "path": "docs/public-alpha-release.md",
@@ -629,8 +664,8 @@
     },
     {
       "path": "scripts/check_public_alpha.py",
-      "sha256": "342026d4fcba21a7b1b167929da4dacd68c5b5c1d6f210dde87697974c39864c",
-      "bytes": 7682
+      "sha256": "be10b93baa816808c8ce0942f16f506b9e4a3527f80249d35fdb44a041fcd4c2",
+      "bytes": 7678
     },
     {
       "path": "scripts/container_backup.py",
@@ -649,8 +684,8 @@
     },
     {
       "path": "scripts/export_release.py",
-      "sha256": "f74393ba80325c0675b8577c1d90c3260141f237c0f579ec817e7a56b744d0a1",
-      "bytes": 15003
+      "sha256": "4f3cb144685df2ad2f4f1a1fd29a7cf0ea7eb6258afad7c657c562be090eefd8",
+      "bytes": 17333
     },
     {
       "path": "scripts/fetch_native.py",
@@ -984,8 +1019,8 @@
     },
     {
       "path": "tests/test_public_alpha_check.py",
-      "sha256": "043aeed45f0136e42dc80b65f15e1f97e7c391bfdb64ed68d98b200d0aa8af40",
-      "bytes": 6778
+      "sha256": "49406f85dc9a7a089ac8729d42d75e530d162bdfb5beb3ca11d6deed34d891a2",
+      "bytes": 7028
     },
     {
       "path": "tests/test_publish_evidence_regression.py",
@@ -1004,8 +1039,8 @@
     },
     {
       "path": "tests/test_release_export.py",
-      "sha256": "66c2d8b557a1bbe2f62061d08255399108a058228087edc83795e6870294c599",
-      "bytes": 6631
+      "sha256": "40e208f75780d7bc922f7b81ce16b9e41ddffd2a292cd483c5091f435f4dad44",
+      "bytes": 7196
     },
     {
       "path": "tests/test_reputation_privacy.py",

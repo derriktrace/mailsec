@@ -11,8 +11,15 @@ choice, before enabling email analysis. Its web dashboard
 shows the message evidence, assessment, scan coverage, and history of every action.
 Keep your existing address and email apps.
 
-Created by **Derrik Trace**. Apache-2.0 licensed. This is `0.4.0-alpha.8`, an early alpha:
-use monitoring first and evaluate it on your own mail. No 99% accuracy claim is made.
+Created by **Derrik Trace** and licensed under Apache-2.0. **`0.4.0-alpha.8`
+is the first public alpha release.** It is an early version: start in monitoring
+mode and evaluate its decisions on your own mail. No 99% accuracy claim is made.
+
+![Synthetic Mailsec overview showing message categories and review activity](docs/images/mailsec-synthetic-dashboard.png)
+
+*Synthetic interface preview; no real mail or measured detection result is shown.
+See the [six-screen product tour](docs/product-tour.md) for the setup walkthrough,
+message investigation, and what each control does.*
 
 ## Start locally
 
@@ -72,11 +79,35 @@ Then open the same localhost URL on that device. For persistent remote access us
 a trusted HTTPS reverse proxy and a matching OAuth callback. Never expose plain
 HTTP or the console token to an untrusted network.
 
-[Full self-host guide](docs/self-hosting.md) · [Google setup](docs/gmail-setup.md) ·
+[Screenshot walkthrough](docs/product-tour.md) · [Full self-host guide](docs/self-hosting.md) · [Google setup](docs/gmail-setup.md) ·
 [Local model guide](docs/local-models.md) · [Detection question editor](docs/detection-questions.md) ·
 [Data sharing and consent](docs/data-sharing.md) · [Plain-English pipeline](docs/analysis-pipeline.md) ·
 [Architecture](docs/architecture.md) ·
 [Release validation](docs/release-validation.md)
+
+## How a message is analyzed
+
+Mailsec operates **after Gmail delivers a message**. With that mailbox owner's
+OAuth permission, it saves the original locally, checks it with ClamAV and bounded
+static attachment extraction, and collects identity, authentication, link, and
+request evidence. Gmail's reported SPF, DKIM, and DMARC results are considered,
+but passing authentication alone does not prove a sender represents a claimed
+brand. An unknown or unavailable check is recorded as a gap rather than treated
+as proof of safety or malice.
+
+The selected provider—Jev, Ollama, or a compatible model server—answers
+versioned questions about **clean, spam, suspicious, or phishing** and supporting
+facts. A targeted extra check looks for consequential requests that the first
+assessment may have missed. Application policy then decides whether the result
+needs review or qualifies for a permitted Gmail action. The model's suggested
+action does not directly change a mailbox. The console preserves the original,
+the evidence sent to the model, its question version and response, policy reasons,
+and an action ledger so you can investigate or correct a result.
+
+The [full analysis pipeline](docs/analysis-pipeline.md) explains all nine stages,
+their evidence boundaries, and the limits of each check. The
+[architecture guide](docs/architecture.md) covers the container and trust
+boundaries. The [product tour](docs/product-tour.md) shows the same flow in the GUI.
 
 ## What it does
 

@@ -19,7 +19,7 @@ from urllib.parse import unquote, urlsplit
 sys.dont_write_bytecode = True  # Keep this read-only checker from creating a sibling cache.
 from export_release import REQUIRED_FILES, ReleaseError, read_regular  # noqa: E402
 
-MARKDOWN_LINK = re.compile(r'(?<!!)\[[^\]]+\]\(([^)\s]+)(?:\s+"[^"]*")?\)')
+MARKDOWN_LINK = re.compile(r'!?\[[^\]]+\]\(([^)\s]+)(?:\s+"[^"]*")?\)')
 
 
 def check_source(source: Path, *, require_manifest: bool = False) -> dict:

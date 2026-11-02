@@ -18,7 +18,10 @@ def source(tmp_path):
     for name in release.REQUIRED_FILES:
         path = root / name
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text('X-Mailsec-Synthetic: true\n\nSynthetic example\n' if name.startswith('samples/') else 'Public source fixture\n')
+        if name in release.PUBLIC_SCREENSHOTS:
+            path.write_bytes((Path(__file__).parents[1] / name).read_bytes())
+        else:
+            path.write_text('X-Mailsec-Synthetic: true\n\nSynthetic example\n' if name.startswith('samples/') else 'Public source fixture\n')
     for name in ('secrets/key', 'data/mail.db', 'backups/mail.dump', '.env.local', 'organization.yaml',
                  'compose.yaml', 'Dockerfile', 'start.sh', 'docs/private-review.md', 'tests/live-readonly-ui.mjs',
                  'tests/test_tls_bootstrap.py', 'scripts/prepare_pilot.py', 'Dockerfile.inspection',
@@ -47,6 +50,9 @@ def test_export_excludes_private_state_and_preserves_public_tests(source, tmp_pa
     assert (destination / 'Dockerfile').read_bytes() == (source / 'Dockerfile.selfhost').read_bytes()
     assert (destination / '.env.example').read_text() == release.PUBLIC_ENV_EXAMPLE
     assert '.selfhost/' in (destination / '.gitignore').read_text()
+    assert '*.eml' in (destination / '.gitignore').read_text()
+    assert all((destination / name).read_bytes() == (source / name).read_bytes()
+               for name in release.PUBLIC_SCREENSHOTS)
     assert (destination / 'mailsec/new_component.py').is_file()
     assert (destination / 'tests/test_new_component.py').is_file()
     assert (destination / 'tests/privacy_helpers.py').read_bytes() == (source / 'tests/privacy_helpers.py').read_bytes()
@@ -67,7 +73,8 @@ def test_export_excludes_private_state_and_preserves_public_tests(source, tmp_pa
         assert all(b'DO NOT EXPORT' not in archive.extractfile(member).read() for member in members)
 
 
-@pytest.mark.parametrize('kind', ['symlink', 'oversize', 'binary', 'credential', 'private_marker', 'non_synthetic_mail'])
+@pytest.mark.parametrize('kind', ['symlink', 'oversize', 'binary', 'credential', 'private_marker',
+                                  'non_synthetic_mail', 'png_trailing_data'])
 def test_preflight_rejects_unsafe_selected_files_without_creating_output(source, tmp_path, monkeypatch, kind):
     allow_mock_scan(monkeypatch)
     target = source / 'mailsec/new_component.py'
@@ -86,6 +93,9 @@ def test_preflight_rejects_unsafe_selected_files_without_creating_output(source,
     elif kind == 'private_marker':
         target.write_text('owner = "private-person@private.invalid"\n')
         markers = (b'private-person@private.invalid',)
+    elif kind == 'png_trailing_data':
+        screenshot = source / release.PUBLIC_SCREENSHOTS[0]
+        screenshot.write_bytes(screenshot.read_bytes() + b'trailing')
     else:
         (source / 'samples/receipt.eml').write_text('From: private-person@private.invalid\n\nReal email\n')
     destination = tmp_path / 'public-source'
