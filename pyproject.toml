@@ -19,7 +19,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-inspection = ["pypdf>=6,<7", "Pillow>=13,<14", "zxing-cpp>=2.3,<4", "defusedxml>=0.7,<1", "oletools>=0.60,<1"]
+inspection = ["pypdf>=6,<8", "Pillow>=13,<14", "zxing-cpp>=2.3,<4", "defusedxml>=0.7,<1", "oletools>=0.60,<1"]
 dev = ["pytest>=8,<10", "ruff>=0.11,<1"]
 
 [project.scripts]
